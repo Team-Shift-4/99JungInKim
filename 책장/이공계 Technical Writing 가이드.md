@@ -1,4 +1,4 @@
-이 글은 이공계 Technical Writing 가이드를 읽고 작성했습니다.
+이 글은 이공계 Technical Writing 가이드를 읽고 작성하였다.
 
 # 목차
 
