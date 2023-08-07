@@ -390,9 +390,9 @@ typedef void (*LogicalDecodeMessageCB) (struct LogicalDecodingContext *ctx,
 
 `txn` 매개변수에는 트랜잭션이 커밋된 타임스탬프와 해당 XID와 같은 트랜잭션에 대한 메타 정보가 포함된다.
 메세지가 트랜잭션이 아니며 메세지를 기록한 트랜잭션에서 XID가 아직 할당되지 않은 경우 NULL이 될 수 있다.
-`lsn`에는 메세지의 WAL 위치가 윘다.
+`lsn`에는 메세지의 WAL 위치가 있다.
 `transactional`은 메세지가 트랜잭션으로 전송되었는지 여부를 나타낸다.
-`prefix`는 현재 플러그인에 대한 흥미로운 메세지를 식별하는 데 사용할 수 있는 임의의 null 정료 접두사이다.
+`prefix`는 현재 플러그인에 대한 흥미로운 메세지를 식별하는 데 사용할 수 있는 임의의 null 종료 접두사이다.
 `message` 매개변수는 `message_size` 크기의 실제 메세지를 보유한다.
 
 출력 플러그인이 관심 있는 것으로 간주하는 접두사가 고유한지 확인하기 위해 각별한 주의를 기울여야 한다.
