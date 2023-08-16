@@ -48,8 +48,7 @@ function splitString(str, chunk) {
     return result;
 }
 function resultToBuffer(result){
-    let length = -1;
-    console.log("page 0");
+    let length, length_save;
     readXLogPageHeaderData(result);
     const pages = splitString(result, BLOCKSIZE);
     result = null;
@@ -61,6 +60,7 @@ function resultToBuffer(result){
         length = read4ByteInt(pages[page], ptr % 8192);
         if(length == 0) return;
         else if(length % 8 != 0) {
+            length_save = length;
             length = (parseInt(length / 8) + 1) * 8;
         }
         let resultArray = [];
@@ -76,22 +76,26 @@ function resultToBuffer(result){
             ptr++;
             
         }
+        const table = document.createElement("table");
+        for(let i = 0; i < length_save; i+=16) {
+            const tableRow = document.createElement("tr");
+            for(let j = 0; j < 16; j++) {
+                const tableData = document.createElement("td");
+                var temp = parseInt(resultArray[i+j]);
+                if(i+j < resultArray.length) {
+                    tableData.innerText = (temp<16)?"0"+temp.toString(16) :temp.toString(16);
+
+                }
+                tableData.style = 'border: 1px solid #444444';
+                tableData.style.width = '40px'
+                tableRow.appendChild(tableData);
+            }
+            table.appendChild(tableRow);
+        }
+        table.style = "border: 1px solid #444444"
+        document.querySelector("#result").appendChild(table);
         console.log(resultArray);
         resultArray = null;
-        // for (let i = 40 ; i<taskLength; i++) {
-        //     let length = read4Byte(result, i);
-        //     if(length == 0) return;
-        //     if(length % 8 != 0) {
-        //         length = (parseInt(length / 8) + 1) * 8;
-        //     }
-        //     let arr = [];
-        //     for(let j = 0; j < length; j++) {
-        //         arr[j] = result.charCodeAt(i+j);
-        //     }
-        //     i+=length - 1;
-        //     console.log(arr);
-        //     arr = [];
-        // }
     }
 }
 document.querySelector("#read").addEventListener('click', function() {

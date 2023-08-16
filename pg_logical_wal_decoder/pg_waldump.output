@@ -1,0 +1,184 @@
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03000028, prev 0/02000B48, desc: RUNNING_XACTS nextXid 935 latestCompletedXid 934
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03000060, prev 0/03000028, desc: RUNNING_XACTS nextXid 935 latestCompletedXid 934
+rmgr: XLOG        len (rec/tot):    106/   106, tx:          0, lsn: 0/03000098, prev 0/03000060, desc: CHECKPOINT_ONLINE redo 0/3000060; tli 1; prev tl0; multi 1; offset 0; oldest xid 561 in DB 1; oldest multi 1 in DB 1; oldest/newest commit timestamp xid: 0/0; oldest running xid 935; online
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03000108, prev 0/03000098, desc: RUNNING_XACTS nextXid 935 latestCompletedXid 934
+rmgr: Storage     len (rec/tot):     42/    42, tx:          0, lsn: 0/03000140, prev 0/03000108, desc: CREATE base/13881/16617
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03000170, prev 0/03000140, desc: NEW_CID rel 1663/13881/1247; tid 9/15; cmin: 0, 5
+rmgr: Heap        len (rec/tot):     54/  2778, tx:        935, lsn: 0/030001B0, prev 0/03000170, desc: INSERT off 15
+        blkref #0: rel 1663/13881/1247 fork main blk 9 (FPW); hole: offset: 84, length: 5468
+rmgr: Btree       len (rec/tot):     53/  1393, tx:        935, lsn: 0/03000C90, prev 0/030001B0, desc: INSERT_LEAF off 65
+        blkref #0: rel 1663/13881/2703 fork main blk 2 (FPW); hole: offset: 284, length: 6852
+rmgr: Btree       len (rec/tot):     53/  2657, tx:        935, lsn: 0/03001208, prev 0/03000C90, desc: INSERT_LEAF off 44
+        blkref #0: rel 1663/13881/2704 fork main blk 2 (FPW); hole: offset: 340, length: 5588
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03001C70, prev 0/03001208, desc: NEW_CID rel 1663/13881/2608; tid 55/123; cmin: 0295
+rmgr: Heap        len (rec/tot):     54/  7458, tx:        935, lsn: 0/03001CB0, prev 0/03001C70, desc: INSERT off 123
+        blkref #0: rel 1663/13881/2608 fork main blk 55 (FPW); hole: offset: 516, length: 788
+rmgr: Btree       len (rec/tot):     53/  6617, tx:        935, lsn: 0/030039F0, prev 0/03001CB0, desc: INSERT_LEAF off 124
+        blkref #0: rel 1663/13881/2673 fork main blk 35 (FPW); hole: offset: 956, length: 1628
+rmgr: Btree       len (rec/tot):     53/  5469, tx:        935, lsn: 0/030053E8, prev 0/030039F0, desc: INSERT_LEAF off 86
+        blkref #0: rel 1663/13881/2674 fork main blk 47 (FPW); hole: offset: 792, length: 2776
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03006960, prev 0/030053E8, desc: NEW_CID rel 1663/13881/1247; tid 9/16; cmin: 0, 5
+rmgr: Heap        len (rec/tot):    203/   203, tx:        935, lsn: 0/030069A0, prev 0/03006960, desc: INSERT off 16
+        blkref #0: rel 1663/13881/1247 fork main blk 9
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03006A70, prev 0/030069A0, desc: INSERT_LEAF off 65
+        blkref #0: rel 1663/13881/2703 fork main blk 2
+rmgr: Btree       len (rec/tot):     53/  6381, tx:        935, lsn: 0/03006AB0, prev 0/03006A70, desc: INSERT_LEAF off 82
+        blkref #0: rel 1663/13881/2704 fork main blk 1 (FPW); hole: offset: 816, length: 1864
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/030083B8, prev 0/03006AB0, desc: NEW_CID rel 1663/13881/2608; tid 55/124; cmin: 0295
+rmgr: Heap        len (rec/tot):     80/    80, tx:        935, lsn: 0/030083F8, prev 0/030083B8, desc: INSERT off 124
+        blkref #0: rel 1663/13881/2608 fork main blk 55
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03008448, prev 0/030083F8, desc: INSERT_LEAF off 124
+        blkref #0: rel 1663/13881/2673 fork main blk 35
+rmgr: Btree       len (rec/tot):     53/  4909, tx:        935, lsn: 0/03008490, prev 0/03008448, desc: INSERT_LEAF off 35
+        blkref #0: rel 1663/13881/2674 fork main blk 44 (FPW); hole: offset: 712, length: 3336
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/030097C0, prev 0/03008490, desc: NEW_CID rel 1663/13881/1259; tid 5/2; cmin: 0, c
+rmgr: Heap        len (rec/tot):     54/  2282, tx:        935, lsn: 0/03009800, prev 0/030097C0, desc: INSERT off 2
+        blkref #0: rel 1663/13881/1259 fork main blk 5 (FPW); hole: offset: 356, length: 5964
+rmgr: Btree       len (rec/tot):     53/  3333, tx:        935, lsn: 0/0300A108, prev 0/03009800, desc: INSERT_LEAF off 162
+        blkref #0: rel 1663/13881/2662 fork main blk 2 (FPW); hole: offset: 672, length: 4912
+rmgr: Btree       len (rec/tot):     53/  3633, tx:        935, lsn: 0/0300AE10, prev 0/0300A108, desc: INSERT_LEAF off 81
+        blkref #0: rel 1663/13881/2663 fork main blk 2 (FPW); hole: offset: 396, length: 4612
+rmgr: Btree       len (rec/tot):     53/  4953, tx:        935, lsn: 0/0300BC48, prev 0/0300AE10, desc: INSERT_LEAF off 239
+        blkref #0: rel 1663/13881/3455 fork main blk 4 (FPW); hole: offset: 996, length: 3292
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/0300CFC0, prev 0/0300BC48, desc: NEW_CID rel 1663/13881/1249; tid 52/16; cmin: 0,95
+rmgr: Heap        len (rec/tot):     54/  2446, tx:        935, lsn: 0/0300D000, prev 0/0300CFC0, desc: INSERT off 16
+        blkref #0: rel 1663/13881/1249 fork main blk 52 (FPW); hole: offset: 88, length: 5800
+rmgr: Btree       len (rec/tot):     53/  1989, tx:        935, lsn: 0/0300D990, prev 0/0300D000, desc: INSERT_LEAF off 72
+        blkref #0: rel 1663/13881/2658 fork main blk 14 (FPW); hole: offset: 312, length: 6256
+rmgr: Btree       len (rec/tot):     53/  7993, tx:        935, lsn: 0/0300E170, prev 0/0300D990, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9 (FPW); hole: offset: 1604, length: 252
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/030100C8, prev 0/0300E170, desc: NEW_CID rel 1663/13881/1249; tid 52/17; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010108, prev 0/030100C8, desc: INSERT off 17
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/030101B8, prev 0/03010108, desc: INSERT_LEAF off 72
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010200, prev 0/030101B8, desc: INSERT_LEAF off 396
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010240, prev 0/03010200, desc: NEW_CID rel 1663/13881/1249; tid 52/18; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010280, prev 0/03010240, desc: INSERT off 18
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03010330, prev 0/03010280, desc: INSERT_LEAF off 74
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010378, prev 0/03010330, desc: INSERT_LEAF off 397
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/030103B8, prev 0/03010378, desc: NEW_CID rel 1663/13881/1249; tid 52/19; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/030103F8, prev 0/030103B8, desc: INSERT off 19
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/030104A8, prev 0/030103F8, desc: INSERT_LEAF off 73
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/030104F0, prev 0/030104A8, desc: INSERT_LEAF off 398
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010530, prev 0/030104F0, desc: NEW_CID rel 1663/13881/1249; tid 52/20; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010570, prev 0/03010530, desc: INSERT off 20
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     80/    80, tx:        935, lsn: 0/03010620, prev 0/03010570, desc: INSERT_LEAF off 75
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010670, prev 0/03010620, desc: INSERT_LEAF off 399
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/030106B0, prev 0/03010670, desc: NEW_CID rel 1663/13881/1249; tid 52/21; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/030106F0, prev 0/030106B0, desc: INSERT off 21
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/030107A0, prev 0/030106F0, desc: INSERT_LEAF off 77
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/030107E8, prev 0/030107A0, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010828, prev 0/030107E8, desc: NEW_CID rel 1663/13881/1249; tid 52/22; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010868, prev 0/03010828, desc: INSERT off 22
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03010918, prev 0/03010868, desc: INSERT_LEAF off 78
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010960, prev 0/03010918, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/030109A0, prev 0/03010960, desc: NEW_CID rel 1663/13881/1249; tid 52/23; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/030109E0, prev 0/030109A0, desc: INSERT off 23
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03010A90, prev 0/030109E0, desc: INSERT_LEAF off 72
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010AD8, prev 0/03010A90, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010B18, prev 0/03010AD8, desc: NEW_CID rel 1663/13881/1249; tid 52/24; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010B58, prev 0/03010B18, desc: INSERT off 24
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03010C08, prev 0/03010B58, desc: INSERT_LEAF off 79
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010C50, prev 0/03010C08, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010C90, prev 0/03010C50, desc: NEW_CID rel 1663/13881/1249; tid 52/25; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010CD0, prev 0/03010C90, desc: INSERT off 25
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03010D80, prev 0/03010CD0, desc: INSERT_LEAF off 72
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010DC8, prev 0/03010D80, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010E08, prev 0/03010DC8, desc: NEW_CID rel 1663/13881/1249; tid 52/26; cmin: 0,95
+rmgr: Heap        len (rec/tot):    175/   175, tx:        935, lsn: 0/03010E48, prev 0/03010E08, desc: INSERT off 26
+        blkref #0: rel 1663/13881/1249 fork main blk 52
+rmgr: Btree       len (rec/tot):     72/    72, tx:        935, lsn: 0/03010EF8, prev 0/03010E48, desc: INSERT_LEAF off 80
+        blkref #0: rel 1663/13881/2658 fork main blk 14
+rmgr: Btree       len (rec/tot):     64/    64, tx:        935, lsn: 0/03010F40, prev 0/03010EF8, desc: INSERT_LEAF off 395
+        blkref #0: rel 1663/13881/2659 fork main blk 9
+rmgr: Heap2       len (rec/tot):     86/    86, tx:        935, lsn: 0/03010F80, prev 0/03010F40, desc: CLEAN remxid 815
+        blkref #0: rel 1663/13881/2608 fork main blk 55
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        935, lsn: 0/03010FD8, prev 0/03010F80, desc: NEW_CID rel 1663/13881/2608; tid 55/125; cmin: 0295
+rmgr: Heap        len (rec/tot):     80/    80, tx:        935, lsn: 0/03011018, prev 0/03010FD8, desc: INSERT off 125
+        blkref #0: rel 1663/13881/2608 fork main blk 55
+rmgr: Btree       len (rec/tot):     53/  5665, tx:        935, lsn: 0/03011068, prev 0/03011018, desc: INSERT_LEAF off 184
+        blkref #0: rel 1663/13881/2673 fork main blk 42 (FPW); hole: offset: 820, length: 2580
+rmgr: Btree       len (rec/tot):     53/  6225, tx:        935, lsn: 0/030126A8, prev 0/03011068, desc: INSERT_LEAF off 140
+        blkref #0: rel 1663/13881/2674 fork main blk 26 (FPW); hole: offset: 900, length: 2020
+rmgr: Standby     len (rec/tot):     42/    42, tx:        935, lsn: 0/03013F00, prev 0/030126A8, desc: LOCK xid 935 db 13881 rel 16617
+rmgr: Transaction len (rec/tot):    533/   533, tx:        935, lsn: 0/03013F30, prev 0/03013F00, desc: COMMIT 2023-08-14 11:02:46.850580 KST; inval msge 74 catcache 73 catcache 50 catcache 49 catcache 7 catcache 6 catcache 7 catcache 6 catcache 7 catcache 6 catcache 7 catcache 6 catcache 7 catcache 6 ctcache 6 catcache 7 catcache 6 catcache 7 catcache 6 catcache 7 catcache 6 catcache 7 catcache 6 snapshot 2608 relcache 16617
+rmgr: Transaction len (rec/tot):     46/    46, tx:        936, lsn: 0/03014160, prev 0/03013F30, desc: COMMIT 2023-08-14 11:02:47.383972 KST
+rmgr: Transaction len (rec/tot):     46/    46, tx:        937, lsn: 0/03014190, prev 0/03014160, desc: COMMIT 2023-08-14 11:02:47.583807 KST
+rmgr: Heap2       len (rec/tot):     59/  2635, tx:          0, lsn: 0/030141C0, prev 0/03014190, desc: CLEAN remxid 855
+        blkref #0: rel 1663/13881/2619 fork main blk 4 (FPW); hole: offset: 112, length: 5616
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03014C10, prev 0/030141C0, desc: RUNNING_XACTS nextXid 938 latestCompletedXid 937
+rmgr: Heap        len (rec/tot):    111/   111, tx:        938, lsn: 0/03014C48, prev 0/03014C10, desc: INSERT+INIT off 1
+        blkref #0: rel 1663/13881/16617 fork main blk 0
+rmgr: Transaction len (rec/tot):     46/    46, tx:        938, lsn: 0/03014CB8, prev 0/03014C48, desc: COMMIT 2023-08-14 11:03:24.034225 KST
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03014CE8, prev 0/03014CB8, desc: RUNNING_XACTS nextXid 939 latestCompletedXid 938
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03014D20, prev 0/03014CE8, desc: RUNNING_XACTS nextXid 939 latestCompletedXid 938
+rmgr: XLOG        len (rec/tot):    106/   106, tx:          0, lsn: 0/03014D58, prev 0/03014D20, desc: CHECKPOINT_ONLINE redo 0/3014D20; tli 1; prev tl0; multi 1; offset 0; oldest xid 561 in DB 1; oldest multi 1 in DB 1; oldest/newest commit timestamp xid: 0/0; oldest running xid 939; online
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03014DC8, prev 0/03014D58, desc: RUNNING_XACTS nextXid 939 latestCompletedXid 938
+rmgr: Heap        len (rec/tot):    116/   308, tx:        939, lsn: 0/03014E00, prev 0/03014DC8, desc: INSERT off 2
+        blkref #0: rel 1663/13881/16617 fork main blk 0 (FPW); hole: offset: 32, length: 8000
+rmgr: Transaction len (rec/tot):     46/    46, tx:        939, lsn: 0/03014F38, prev 0/03014E00, desc: COMMIT 2023-08-14 11:05:00.024546 KST
+rmgr: Heap        len (rec/tot):    122/   122, tx:        940, lsn: 0/03014F68, prev 0/03014F38, desc: HOT_UPDATE off 1 xmax 940 ; new off 3 xmax 0
+        blkref #0: rel 1663/13881/16617 fork main blk 0
+rmgr: Heap        len (rec/tot):    122/   122, tx:        940, lsn: 0/03014FE8, prev 0/03014F68, desc: HOT_UPDATE off 2 xmax 940 ; new off 4 xmax 0
+        blkref #0: rel 1663/13881/16617 fork main blk 0
+rmgr: Transaction len (rec/tot):     46/    46, tx:        940, lsn: 0/03015068, prev 0/03014FE8, desc: COMMIT 2023-08-14 11:05:01.212834 KST
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03015098, prev 0/03015068, desc: RUNNING_XACTS nextXid 941 latestCompletedXid 940
+rmgr: Heap        len (rec/tot):     54/    54, tx:        941, lsn: 0/030150D0, prev 0/03015098, desc: DELETE off 3 KEYS_UPDATED
+        blkref #0: rel 1663/13881/16617 fork main blk 0
+rmgr: Heap        len (rec/tot):     54/    54, tx:        941, lsn: 0/03015108, prev 0/030150D0, desc: DELETE off 4 KEYS_UPDATED
+        blkref #0: rel 1663/13881/16617 fork main blk 0
+rmgr: Transaction len (rec/tot):     46/    46, tx:        941, lsn: 0/03015140, prev 0/03015108, desc: COMMIT 2023-08-14 11:05:22.698449 KST
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03015170, prev 0/03015140, desc: RUNNING_XACTS nextXid 942 latestCompletedXid 941
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/030151A8, prev 0/03015170, desc: RUNNING_XACTS nextXid 942 latestCompletedXid 941
+rmgr: XLOG        len (rec/tot):    106/   106, tx:          0, lsn: 0/030151E0, prev 0/030151A8, desc: CHECKPOINT_ONLINE redo 0/30151A8; tli 1; prev tl0; multi 1; offset 0; oldest xid 561 in DB 1; oldest multi 1 in DB 1; oldest/newest commit timestamp xid: 0/0; oldest running xid 942; online
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03015250, prev 0/030151E0, desc: RUNNING_XACTS nextXid 942 latestCompletedXid 941
+rmgr: Heap        len (rec/tot):    116/   560, tx:        942, lsn: 0/03015288, prev 0/03015250, desc: INSERT off 5
+        blkref #0: rel 1663/13881/16617 fork main blk 0 (FPW); hole: offset: 44, length: 7748
+rmgr: Transaction len (rec/tot):     46/    46, tx:        942, lsn: 0/030154B8, prev 0/03015288, desc: COMMIT 2023-08-14 15:22:03.026226 KST
+rmgr: Heap        len (rec/tot):    111/   111, tx:        943, lsn: 0/030154E8, prev 0/030154B8, desc: INSERT off 6
+        blkref #0: rel 1663/13881/16617 fork main blk 0
+rmgr: Transaction len (rec/tot):     46/    46, tx:        943, lsn: 0/03015558, prev 0/030154E8, desc: COMMIT 2023-08-14 15:22:04.026054 KST
+rmgr: Standby     len (rec/tot):     42/    42, tx:        944, lsn: 0/03015588, prev 0/03015558, desc: LOCK xid 944 db 13881 rel 16617
+rmgr: Storage     len (rec/tot):     42/    42, tx:        944, lsn: 0/030155B8, prev 0/03015588, desc: CREATE base/13881/16620
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        944, lsn: 0/030155E8, prev 0/030155B8, desc: NEW_CID rel 1663/13881/1259; tid 5/2; cmin: 4294
+rmgr: Heap2       len (rec/tot):     60/    60, tx:        944, lsn: 0/03015628, prev 0/030155E8, desc: NEW_CID rel 1663/13881/1259; tid 5/5; cmin: 0, c
+rmgr: Heap        len (rec/tot):     65/  2469, tx:        944, lsn: 0/03015668, prev 0/03015628, desc: UPDATE off 2 xmax 944 ; new off 5 xmax 0
+        blkref #0: rel 1663/13881/1259 fork main blk 5 (FPW); hole: offset: 356, length: 5788
+rmgr: Btree       len (rec/tot):     53/  3353, tx:        944, lsn: 0/03016028, prev 0/03015668, desc: INSERT_LEAF off 162
+        blkref #0: rel 1663/13881/2662 fork main blk 2 (FPW); hole: offset: 676, length: 4892
+rmgr: Btree       len (rec/tot):     53/  3661, tx:        944, lsn: 0/03016D48, prev 0/03016028, desc: INSERT_LEAF off 81
+        blkref #0: rel 1663/13881/2663 fork main blk 2 (FPW); hole: offset: 400, length: 4584
+rmgr: Btree       len (rec/tot):     53/  4973, tx:        944, lsn: 0/03017B98, prev 0/03016D48, desc: INSERT_LEAF off 240
+        blkref #0: rel 1663/13881/3455 fork main blk 4 (FPW); hole: offset: 1000, length: 3272
+rmgr: Heap        len (rec/tot):     42/    42, tx:        944, lsn: 0/03018F20, prev 0/03017B98, desc: TRUNCATE nrelids 1 relids 16617
+rmgr: Transaction len (rec/tot):    114/   114, tx:        944, lsn: 0/03018F50, prev 0/03018F20, desc: COMMIT 2023-08-14 15:22:05.549332 KST; rels: base 50 catcache 49 relcache 16617
+rmgr: Transaction len (rec/tot):     46/    46, tx:        945, lsn: 0/03018FC8, prev 0/03018F50, desc: COMMIT 2023-08-14 15:22:06.139040 KST
+rmgr: Transaction len (rec/tot):     46/    46, tx:        946, lsn: 0/03018FF8, prev 0/03018FC8, desc: COMMIT 2023-08-14 15:22:06.410932 KST
+rmgr: Standby     len (rec/tot):     50/    50, tx:          0, lsn: 0/03019028, prev 0/03018FF8, desc: RUNNING_XACTS nextXid 947 latestCompletedXid 946
+rmgr: XLOG        len (rec/tot):     24/    24, tx:          0, lsn: 0/03019060, prev 0/03019028, desc: SWITCH
