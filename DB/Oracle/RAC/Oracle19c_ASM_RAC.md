@@ -1153,3 +1153,7 @@ ora.scan3.vip
 ![image-20230821204215061](./assets/image-20230821204215061.png)
 
 ![image-20230821204316190](./assets/image-20230821204316190.png)
+
+# ASMCA로 ACFS 만들기
+
+![image-20230828120815868](./assets/image-20230828120815868.png)

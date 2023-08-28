@@ -26,6 +26,31 @@ function readXLogPageHeaderData(str){
         BLOCKSIZE = xlp_xlog_blcksz;
         returnPtr = 40;
     }
+    const table = document.createElement("table");
+    
+    const tr1 = document.createElement("tr");
+    const tr2 = document.createElement("tr");
+
+    const th_magic          = document.createElement("th"); th_magic.innerText          = "xlp_magic";          tr1.appendChild(th_magic);
+    const th_info           = document.createElement("th"); th_info.innerText           = "xlp_info";           tr1.appendChild(th_info);
+    const th_tli            = document.createElement("th"); th_tli.innerText            = "xlp_tli";            tr1.appendChild(th_tli);
+    const th_pageaddr       = document.createElement("th"); th_pageaddr.innerText       = "xlp_pageaddr";       tr1.appendChild(th_pageaddr);
+    const th_rem_len        = document.createElement("th"); th_rem_len.innerText        = "xlp_rem_len";        tr1.appendChild(th_rem_len);
+    const th_sysid          = document.createElement("th"); th_sysid.innerText          = "xlp_sysid";          tr1.appendChild(th_sysid);
+    const th_segsize        = document.createElement("th"); th_segsize.innerText        = "xlp_segsize";        tr1.appendChild(th_segsize);
+    const th_xlog_blcksz    = document.createElement("th"); th_xlog_blcksz.innerText    = "xlp_xlog_blcksz";    tr1.appendChild(th_xlog_blcksz);
+
+    const td_magic          = document.createElement("td"); td_magic.innerText          = xlp_magic;            tr2.appendChild(td_magic);
+    const td_info           = document.createElement("td"); td_info.innerText           = xlp_info;             tr2.appendChild(td_info);
+    const td_tli            = document.createElement("td"); td_tli.innerText            = xlp_tli;              tr2.appendChild(td_tli);
+    const td_pageaddr       = document.createElement("td"); td_pageaddr.innerText       = xlp_pageaddr;         tr2.appendChild(td_pageaddr);
+    const td_rem_len        = document.createElement("td"); td_rem_len.innerText        = xlp_rem_len;          tr2.appendChild(td_rem_len);
+    const td_sysid          = document.createElement("td"); td_sysid.innerText          = xlp_sysid;            tr2.appendChild(td_sysid);
+    const td_segsize        = document.createElement("td"); td_segsize.innerText        = xlp_segsize;          tr2.appendChild(td_segsize);
+    const td_xlog_blcksz    = document.createElement("td"); td_xlog_blcksz.innerText    = xlp_xlog_blcksz;      tr2.appendChild(td_xlog_blcksz);
+    
+    table.appendChild(tr1); table.appendChild(tr2);
+    document.querySelector("#result").appendChild(table);
     return returnPtr;
 }
 function read8ByteInt(str, i) {
@@ -47,6 +72,29 @@ function splitString(str, chunk) {
     }
     return result;
 }
+
+function setHeaderColor(pos){
+    let result;
+    switch(pos) {
+        case 0:case 1:case 2:case 3:
+            result = 'red';
+            break;
+        case 4:case 5:case 6:case 7:
+            result = 'orange';
+            break;
+        case 8:case 9:case 10:case 11:case 12:case 13:case 14:case 15:
+            result = 'yellow';
+            break;
+        case 16:case 17:
+            result = 'green';
+            break;
+        case 20:case 21:case 22:case 23:
+            result = 'blue';
+            break;
+    }
+    return result;
+}
+
 function resultToBuffer(result){
     let length, length_save;
     readXLogPageHeaderData(result);
@@ -82,11 +130,12 @@ function resultToBuffer(result){
             for(let j = 0; j < 16; j++) {
                 const tableData = document.createElement("td");
                 var temp = parseInt(resultArray[i+j]);
+                tableData.style.backgroundColor = setHeaderColor(i+j);
                 if(i+j < resultArray.length) {
                     tableData.innerText = (temp<16)?"0"+temp.toString(16) :temp.toString(16);
 
                 }
-                tableData.style = 'border: 1px solid #444444';
+                tableData.style.border = '1px solid #444444';
                 tableData.style.width = '40px'
                 tableRow.appendChild(tableData);
             }
