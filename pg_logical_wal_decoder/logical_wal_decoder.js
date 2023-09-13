@@ -6,10 +6,11 @@ const   UP0 = 1,
         UP5 = UP4*UP1,
         UP6 = UP5*UP1,
         UP7 = UP6*UP1;
-let     SYSID,
+let     pages,
+        SYSID,
         SEGSIZE,
         BLOCKSIZE;
-function readXLogPageHeaderData(str){
+function readXLogPageHeaderData(str) {
     let xlp_magic, xlp_info, xlp_tli, xlp_pageaddr, xlp_rem_len, xlp_sysid, xlp_segsize, xlp_xlog_blcksz, returnPtr = 24;
     xlp_magic = read2ByteInt(str, 0);
     xlp_info = read2ByteInt(str, 2);
@@ -73,7 +74,7 @@ function splitString(str, chunk) {
     return result;
 }
 
-function setHeaderColor(pos){
+function setHeaderColor(pos) {
     let result;
     switch(pos) {
         case 0:case 1:case 2:case 3:
@@ -94,16 +95,35 @@ function setHeaderColor(pos){
     }
     return result;
 }
-
-function resultToBuffer(result){
+function readXLogRecord(str) {
+}
+function resultPrinter(result) {
+    let ptr=0, length=-1, cnt=0, array = [], struct = Object.assign({});
+    ptr += readXLogPageHeaderData(result);
+    for(let i = 40; i < SEGSIZE; i++){
+        if(i%BLOCKSIZE == 0){
+            i+=24;
+        }
+        array.push(result.charCodeAt(i));
+    }
+    for(let i = 0; i < array.length; i++) {
+        length=array[i]*UP0 + array[i+1]*UP1 + array[i+2]*UP2 + array[i+3]*UP3;
+        struct[cnt] = [];
+        for(let j =0; j < length; j++) {
+            struct[cnt][j] = array[i+j];
+        }
+    }
+    debugger;
+}
+function resultToBuffer(result) {
     let length, length_save;
     readXLogPageHeaderData(result);
-    const pages = splitString(result, BLOCKSIZE);
+    pages = splitString(result, BLOCKSIZE);
     result = null;
     for(let ptr = 0; ptr<SEGSIZE;) {
         let page = parseInt(ptr / BLOCKSIZE);
         if(ptr % BLOCKSIZE == 0) {
-            ptr += readXLogPageHeaderData(pages[page]);
+            ptr += readXLogPageHeaderData(page);
         }
         length = read4ByteInt(pages[page], ptr % 8192);
         if(length == 0) return;
@@ -157,10 +177,15 @@ document.querySelector("#read").addEventListener('click', function() {
     reader = new FileReader();
     reader.onloadend = function(e) {
         // console.log(e.target.result);
-        resultToBuffer(e.target.result);
+        // resultToBuffer(e.target.result);
+        resultPrinter(e.target.result);
     };
     reader.onerror = function(e) {
         alert('Error: '+e.type);
     }
     reader.readAsBinaryString(file);
 });
+
+//  FR세팅
+//      FULL
+//      DELETE, DELETE 안함

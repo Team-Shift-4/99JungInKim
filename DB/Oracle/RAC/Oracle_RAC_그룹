@@ -1,0 +1,12 @@
+| 논리적 운영 시스템 그룹 이름 | 기본 실제 Unix / Linux 그룹 이름 | 그룹별로 인증된 시스템 권한 회원                             |
+| ---------------------------- | -------------------------------- | ------------------------------------------------------------ |
+| OINSTALL                     | oinstall                         | 설치 소유자를 위한 설치 시스템 권한<br />중앙에 쓸 수 있는 권한이 포함되어 있다.<br />각 서버의 oraInventory 디렉터리와 기타 Oracle Binary 설치 소유자에게 부여된 사용자 권한 |
+| OSDBA                        | dba                              | DB에 대한 SYSDBA 시스템 권한<br />데이터베이스에 대한 모든 시스템 권한이 포함된다. |
+| OSOPER                       | oper                             | DB의 시작과 종료 시스템 권한                                 |
+| OSBACKUPDBA                  | backupdba                        | DB의 백업과 복구 시스템 권한                                 |
+| OSDGDBA                      | dgdba                            | Data Guard, 관리 및 모니터링할 수 있는 시스템 권한           |
+| OSKMDBA                      | kmdba                            | 암호화 키에 대한 시스템 권한<br />Oracle Wallet과 같은 어플리케이션 관리 관리자 |
+| OSASM                        | asmadmin                         | Oracle에 대한 모든 시스템 권한을 포함하는 클러스터 ASM 스토리지에 대한 SYSASM 시스템 권한 |
+| OSOPER for ASM               | asmoper                          | ASM의 시작 및 종료 시스템 권한                               |
+| OSDBA for ASM                | asmdba                           | ASM 시스템 권한을 얻기 위한 SYSDBA<br />Oracle ASM에서 관리하는 파일에 대한 쓰기 엑세스 |
+| OSRACDBA                     | racdba                           | 매일 수행할 수 있는 SYSRAC 권한<br />Oracle RAC에서 Oracle DB 관리 그룹 |

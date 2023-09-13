@@ -65,4 +65,3 @@ RMGR과 Flag의 조합으로 어떤 이벤트인지 나타낸다.
 | 01      | TRANSACTION_STATUS_COMMITTED     |
 | 02      | TRANSACTION_STATUS_ABORTED       |
 | 03      | TRANSACTION_STATUS_SUB_COMMITTED |
-
