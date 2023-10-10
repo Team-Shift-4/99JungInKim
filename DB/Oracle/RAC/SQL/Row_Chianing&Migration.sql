@@ -2,7 +2,7 @@
 ---------------------------------------------------   UPDATE CHAINING / MIGRATION   ---------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- UPDATE CHAINING / MIGRATION �׽�Ʈ ���̽� #1 : row �и� �׽�Ʈ
+-- UPDATE CHAINING / MIGRATION 테스트 케이스 #1 : row 분리 테스트
 DROP TABLE UPD_CHAIN_TEST;
 
 CREATE TABLE UPD_CHAIN_TEST (
@@ -15,7 +15,7 @@ CREATE TABLE UPD_CHAIN_TEST (
 );
 
 
--- 233 byte�� row ���� ( block �� 33�� )
+-- 233 byte의 row 저장 ( block 당 33개 )
 DECLARE
     r_id NUMBER := 1;
 BEGIN
@@ -33,7 +33,7 @@ BEGIN
 END;
 /
 
--- 1. 2���� row�� �и� -->  H (lock) -> FL (insert : r_id ~ e)  > H (overwrite)
+-- 1. 2개의 row로 분리 -->  H (lock) -> FL (insert : r_id ~ e)  > H (overwrite)
 UPDATE UPD_CHAIN_TEST SET B = LPAD('B', 335 ,'B'),  c = LPAD('C', 335 ,'C'),  d = LPAD('D', 335 ,'D') WHERE r_id = 1;
 COMMIT;
 
@@ -41,7 +41,7 @@ COMMIT;
 UPDATE  UPD_CHAIN_TEST SET B = LPAD('B', 200 ,'B'),  e = LPAD('E', 200 ,'E')  WHERE r_id = 1;
 COMMIT;
 
--- 3. 3���� row�� �и� -->  H (lock) -> L (insert : D, E) -> F (insert: r_id ~ C) -> FL (delete) -> CFA
+-- 3. 3개의 row로 분리 -->  H (lock) -> L (insert : D, E) -> F (insert: r_id ~ C) -> FL (delete) -> CFA
 UPDATE  UPD_CHAIN_TEST SET C = LPAD('C', 4000 ,'C'),  e = LPAD('E', 4000 ,'E')  WHERE r_id = 1;
 COMMIT;
 
@@ -57,7 +57,7 @@ COMMIT;
 UPDATE  UPD_CHAIN_TEST SET  C = LPAD('C', 500 ,'C') , D = LPAD('D', 200 ,'D'),  e = LPAD('E', 200 ,'E')  WHERE r_id = 1;
 COMMIT;
 
---  chaining�� block�� free space�� row ����
+--  chaining된 block의 free space에 row 저장
 DECLARE
     r_id NUMBER := 35;
 BEGIN
@@ -75,7 +75,7 @@ BEGIN
 END;
 /
 
--- 7. 4���� row�� �и�  H (lock) -> C (insert : C) -> F (insert : r_id ~ B) -> F (delete : r_id ~ B) -> 11.8
+-- 7. 4개의 row로 분리  H (lock) -> C (insert : C) -> F (insert : r_id ~ B) -> F (delete : r_id ~ B) -> 11.8
 UPDATE  UPD_CHAIN_TEST SET  B = LPAD('B', 4000 ,'B'), C = LPAD('C', 4000 ,'C') WHERE r_id = 1;
 COMMIT;
 
@@ -108,7 +108,7 @@ UPDATE  UPD_CHAIN_TEST SET  E = LPAD('E', 500 ,'E' ), F = LPAD('F', 200, 'F') WH
 COMMIT;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
--- UPDATE CHAINING / MIGRATION �׽�Ʈ ���̽� #2  
+-- UPDATE CHAINING / MIGRATION 테스트 케이스 #2  
 DROP TABLE UPD_CHAIN_TEST;
 CREATE TABLE UPD_CHAIN_TEST (
 		r_id	  NUMBER PRIMARY KEY,
@@ -144,12 +144,12 @@ ALTER TABLE UPD_CHAIN_TEST ADD G VARCHAR2(4000);
 UPDATE  UPD_CHAIN_TEST SET  A = LPAD('A', 200,'A' ), B = LPAD('B', 200, 'B'), E = LPAD('C', 200, 'C'), F=LPAD('F', 200, 'F'), G= LPAD('G', 200, 'G' ) WHERE r_id = 1;
 COMMIT;
 
--- H (lock) -> FL (insert : r_id ~ G) -> H (overwrite)  ------> default not null�� null�� ������ �̽� ���� ���̽� 
+-- H (lock) -> FL (insert : r_id ~ G) -> H (overwrite)  ------> default not null를 null로 추출한 이슈 재현 케이스 
 UPDATE  UPD_CHAIN_TEST SET  A = LPAD('A', 1000,'A' ), B = LPAD('B', 1000, 'B'), E = LPAD('E', 1000, 'E'), G= LPAD('G', 2000, 'G' ) WHERE r_id = 20;
 COMMIT;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
--- UPDATE CHAINING / MIGRATION �׽�Ʈ ���̽� #3  
+-- UPDATE CHAINING / MIGRATION 테스트 케이스 #3  
 DROP TABLE UPD_CHAIN_TEST;
 CREATE TABLE UPD_CHAIN_TEST (
 		r_id	  NUMBER PRIMARY KEY,
@@ -208,7 +208,7 @@ commit;
 ---------------------------------------------------                  DELETE CHAINING              ---------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
---  DELETE CHAINING  �׽�Ʈ ���̽� #1,
+--  DELETE CHAINING  테스트 케이스 #1,
 
 DROP TABLE DEL_CHAIN_TEST;
 CREATE TABLE DEL_CHAIN_TEST (
@@ -239,7 +239,7 @@ commit;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- DELETE CHAINING  �׽�Ʈ ���̽� #2.  �� Update chaining / migration �߻� �� DELETE ����
+-- DELETE CHAINING  테스트 케이스 #2.  위 Update chaining / migration 발생 후 DELETE 수행
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -247,10 +247,10 @@ commit;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- DELETE CHAINING  �׽�Ʈ ���̽� #3
+-- DELETE CHAINING  테스트 케이스 #3
 TRUNCATE TABLE DEL_CHAIN_TEST;
 
--- 233 byte�� row ���� ( block �� 33�� )
+-- 233 byte의 row 저장 ( block 당 33개 )
 DECLARE
     r_id NUMBER := 1;
 BEGIN
@@ -277,7 +277,7 @@ DELETE DEL_CHAIN_TEST WHERE r_id = 1;
 commit;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
--- DELETE CHAINING  �׽�Ʈ ���̽� #3 :  Delete chaining + Logminer ���ڵ� ����
+-- DELETE CHAINING  테스트 케이스 #3 :  Delete chaining + Logminer 레코드 패턴
 TRUNCATE TABLE DEL_CHAIN_TEST;
 
 DECLARE
@@ -290,10 +290,10 @@ BEGIN
     commit;
 END;
 /
--- default not null �÷� �߰� 
+-- default not null 컬럼 추가 
 ALTER TABLE DEL_CHAIN_TEST ADD F VARCHAR2(4000) default 'F' NOT NULL;
 
--- default not null �÷� üũ 
+-- default not null 컬럼 체크 
 select col#, segcol#, name, property
 from sys.col$ 
 where obj# = (select object_id from dba_objects 
@@ -301,7 +301,7 @@ where obj# = (select object_id from dba_objects
 order by col#, segcol#;
 
 
--- �ٸ� ü�̴� ���ڵ忡 logminer ���ڵ� ������ ����  default not null �÷� update 
+-- 다른 체이닝 레코드에 logminer 레코드 생성을 위해  default not null 컬럼 update 
 UPDATE DEL_CHAIN_TEST  SET F = 'ARK';
 commit;
 
@@ -323,7 +323,7 @@ CREATE TABLE DEL_CHAIN_TEST (
 INSERT INTO DEL_CHAIN_TEST VALUES(1, LPAD('A', 1700, 'A'), LPAD('B', 1700, 'B'), LPAD('C', 1700, 'C'), LPAD('D', 1700, 'D'), LPAD('E', 1700, 'E'));
 commit;
 
--- default not null �÷� �߰� 
+-- default not null 컬럼 추가 
 ALTER TABLE DEL_CHAIN_TEST ADD F VARCHAR2(4000) default 'F' NOT NULL;
 
 -- (r_id : 1) : H (lock) -> Logminer (NSRCI: r_id) -> L (update: F) -> Logminer (OSV: F)
@@ -376,4 +376,4 @@ set A = LPAD('A', 200 ,'A'),
 commit;                        
 
 delete t_sp_chain;
-commit
+commit;
