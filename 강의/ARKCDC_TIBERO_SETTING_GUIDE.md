@@ -3,6 +3,7 @@
 ```bash
 adctl start
 
+admgr supplog set <SCHEMA>
 admgr supplog add <SCHEMA>
 
 tbsql arkmgr/arkmgr
@@ -51,6 +52,8 @@ select * from ark_supp_tables;
 adctl start
 # admgr을 실행시키기 위해 에이전트를 가동시킵니다.
 
+admgr supplog set <SCHEMA>
+
 admgr supplog add <SCHEMA>
 # 스키마에 포함된 테이블들의 Supplemental Logging을 설정합니다.
 
@@ -60,6 +63,6 @@ select * from ark_supp_tables;
 ```
 
 혹시 추가로 더 필요한 내용이 있으시면 정리하여 보내 드리겠습니다!
-이런 지원이 처음이라 대응이 미흡했던 점 사과드립니다.
 
-아크데이타 김정인 사원 드림
+추가 사항: 테스트 지원 중 send01 모듈의 대상 에이전트가 자기 자신으로 되어 있어 Target 쪽에 Trace 파일이 전달되지 않았습니다.
+해당 상황의 경우 send01.conf에서 Target Agent의 포트 번호를 맞춰 줌으로 해결 됐습니다!

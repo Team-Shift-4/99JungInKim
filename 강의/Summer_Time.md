@@ -1,6 +1,6 @@
 # Summer Time
 
-Summer Time(ST)란 일광 절약 시간제의 다른 말이다.
+Summer Time(ST)이란 일광 절약 시간제의 다른 말이다.
 하절기에 국가의 표준시를 원래 시간보다 앞당겨 사용하는 것을 말한다.
 
 한 시간 정도를 당기기 때문에 ST가 실시되면 8시는 9시로, 2시를 3시로 늦춰 표기하게 된다.
@@ -14,6 +14,11 @@ Summer Time(ST)란 일광 절약 시간제의 다른 말이다.
 ```bash
 # Newyork Time Zone
 
+Sun Mar 12 01:58:01 EST 2023
+Sun Mar 12 01:59:01 EST 2023
+Sun Mar 12 03:00:01 EDT 2023
+Sun Mar 12 03:01:01 EDT 2023
+...
 Sun Nov  5 01:58:01 EDT 2023
 Sun Nov  5 01:59:01 EDT 2023
 Sun Nov  5 01:00:01 EST 2023

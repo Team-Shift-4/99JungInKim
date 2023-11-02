@@ -1,0 +1,1 @@
+# Oracle11g Raw device RAC

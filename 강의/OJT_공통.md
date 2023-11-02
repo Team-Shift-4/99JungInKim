@@ -135,9 +135,109 @@ OS는 한국어로 운영체제라고 한다.
 
 -   Linux Is Not UniX로 재귀약자로 설명하기도 한다.
 
+##### 기술적인 특징
+
+| 특징                 | 설명                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| 계층적인 파일 구조   | /를 기준으로 그 하위 디렉터리에 다시 디렉터리가 존재하는 구조이다.<br />이런 구조를 계층적 파일 구조라 한다.(Tree 구조) |
+| 장치의 파일화        | Device를 파일화하여 사용한다.<br />특정 하드웨어에 명령을 수행하려면 해당 장치 파일에 명령을 내리는 형식이다. |
+| 가상 메모리 사용     | Virtual Memory는 Hard Disk의 일부를 메모리처럼 사용하는 것을 말한다.<br />이런 영역을 SWAP이라고 부른다. |
+| 동적 라이브러리 지원 | 프로그램에서 특정 기능을 실행하기 위한 명령어인 Routine들을 모아 놓은 것을 Library라 한다.<br />프로그램 개발 시 Library 중 필요한 Routine들을 받아 Link 시킨다.<br />이런 Routine들을 공유하는 것을 Shared Library라 한다.<br />Dynamic Shared Library는 실행 파일 내부에 넣지 않고 프로그램을 실행할 때 가져다 사용하므로 메모리 효율성이 높다. |
+| 가상 콘솔            | Virtual Console은 말 그래도 가상 콘솔을 제공하는 기능이다.<br />리눅스는 기본적으로 6개의 가상 콘솔을 제공한다.<br />`ctrl` + `alt` + `F1` ~ `f6` |
+| 파이프               | Pipe는 Process의 통신을 위해 도입된 것이다.<br />어떤 Process의 표준 출력이 다른 프로세스의 표준 입력으로 쓰는 것을 말한다.<br />`|` |
+| Redirection          | Process의 I/O를 Standard I/O가 아닌 다른 I/O로 변경할 때 사용한다.<br />출력 결과를 파일로 저장하거나 파일의 내용을 Process의 입력으로 사용하는 기법이다. |
+
+##### 배포판 요약
+
+-   Redhat 계열
+    -   Redhat Linux와 커뮤니티 버전인 Fedora에서 파생된 배포판들이다.
+    -   패키지 형식은 .rpm이며 패키지 관리자로 yum을 사용한다.
+    -   CentOS, Oracle Linux 등이 있다.
+-   Debian 계열
+    -   데비안에서 파생된 배포판들이다.
+    -   패키지 형식은 .deb이며 패키지 관리자로 apt를 사용한다.
+    -   Chrome OS, TmaxOS 등이 있다. 
+-   Ubuntu 계열
+    -   Kubuntu, Vanilla OS 등이 있다.
+-   Arch 계열
+    -   아치 리눅스에서 파생된 배포판들이다.
+    -   패키지 관리자는 pacman이며 형식은 특정 확장자 없이 tar.gz나 tar.xz이나 관례적으로 압축용 확장자 앞에 .pkg가 붙는다.
+    -   Steam OS 등이 있다.
+-   SUSE 계열
+    -   슬랙웨어 기반으로 시작했으나 현재는 관계가 멀어지고 .rpm을 사용하여 독자적 계열로 취급한다.
+    -   openSUSE 등이 있다.
+
 #### 기본 구조 및 구성
 
+Hardware <-> Kernel <-> Shell <-> Application <-> User
+
+| 구조        | 설명                                                         |
+| ----------- | ------------------------------------------------------------ |
+| Hardware    | 컴퓨터의 하드웨어이다.<br />CPU, 모니터, 키보드, RAM, GPU, Sound Card, 메인보드와 같은 물리적 부품을 의미한다. |
+| Kernel      | OS의 다른 부분이나 Application 수행에 필요한 여러 서비스를 제공한다.<br />프로그램 실행 과정에서 가장 핵심적인 연산이 이루어지는 부분이다.<br />Core라고도 부른다.<br />Hardware를 직접 제어하고, Process 관리, Memory 관리, File System 관리 등을 수행하는 OS의 핵심이다.<br />Application과 Hardware 사이의 관리자 역할을 수행하며 Shell과 연관되어 실행하는 명령을 수행하고 수행 결과를 Shell로 보내는 역할을 한다. |
+| Shell       | OS 상 다양한 OS 기능과 서비스를 구현하는 Interface를 제공한다.<br />사용자의 명령을 해석해 Kernel로 전달하는 프로그램이다.<br />OS의 내부를 감싸는 층이여서 Shell이라고 부른다. |
+| Application | OS에서 실행되는 모든 Software                                |
+
+
+
 #### Group / User
+
+리눅스는 다중 사용자 운영체제이다.
+사용자는 별도의 권한을 가지고 있으며 권한에 따라 파일을 읽고 쓰고 실행할 수 있다.
+
+유저를 확인하는 방법은 `/etc/passwd`를 조회하면 된다.
+
+```bash
+cat /etc/passwd
+
+root:x:0:0:root:/root:/bin/bash
+...
+ark:x:1000:1000:ark:/home/ark:/bin/bash
+...
+```
+
+`/etc/passwd` 파일의 뜻은 다음과 같다.
+
+```bash
+root	:x			:0	:0	:root		:/root			:/bin/bash
+Username:Password	:UID:GID:Description:Home Directory	:Shell Information
+```
+
+위 Password의 x는 
+
+리눅스에는 Group이라는 개념이 있다.
+어떤 파일이나 디렉터리를 특정 권한의 사용자들만 사용할 수 있게 하는 데에 사용한다.
+
+그룹을 확인하는 방법은 `/etc/group`을 조회하면 된다.
+
+```bash
+cat /etc/group
+
+root:x:0:
+...
+ark:x:1000:
+...
+```
+
+기본적으로 Group의 경우 그냥 생성했을 때 1000번 부터 생성되는 것을 확인할 수 있다.
+
+따로 옵션을 주어 해당하는 그룹을 만들 수도 있다.
+
+```bash
+groupadd -g 54321 oinstall
+```
+
+생성한 그룹은 사용자에게 부여할 수 있다.
+
+```bash
+usermod -G oinstall ark
+
+id ark
+
+uid=1000(ark) gid=1000(ark) groups=1000(ark),54321(oinstall)
+```
+
+
 
 ##### 권한
 
