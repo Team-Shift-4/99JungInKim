@@ -689,51 +689,625 @@ Unix 환경에서 가장 많이 쓰이는 문서 편집기이다.
 
 ## Shell Script
 
+Shell Script를 사용하면 Unix 커맨드들을 나열해 실행할 수 있다.
+다른 스크립트 언어와 마찬가지로 제어문과 반복문 사용이 가능하다.
+
+Bash 쉘 기준 예시이다.
+
+```bash
+#						# 주석
+var="Variable"			# 변수
+echo "$var은 변수입니다."	# 변수를 사용하기 위해 변수명 앞 $를 기입한다.
+readonly var			# 변경 불가한 읽기 전용 변수를 만들 수 있다.
+echo $0					# 스크립트 명이다.
+echo $1					# $n = n번째 파라미터이다.
+echo $#					# 파라미터의 개수이다.
+echo $*					# 모든 파라미터를 하나로 처리한다.
+echo $@					# 모든 파라미터를 각각 처리한다.
+echo $?					# 직전 실행한 커맨드의 종료 값이다. 0은 성공이며 1은 실패이다.
+echo $$					# 이 쉘 스크립트의 Process ID이다.
+echo $!					# 마지막으로 실행한 Backgroud Process ID이다.
+
+ARRAY=(1 2 3 4)			# 배열
+echo ${ARRAY[0]}		# 배열의 아이템 하나에 엑세스하는 방법이다.
+echo ${ARRAY[*]}		# 배열의 모든 아이템에 엑세스하는 방법이다.
+
+var1="20"
+var2="10"
+echo `expr 20 + 10`		# 덧셈
+echo `expr 20 - 10`		# 뺄셈
+echo `expr 20 \* 10`	# 곱셈
+echo `expr 20 / 10`		# 나눗셈
+
+if [ $var1 == $var2 ]	# 조건문
+then
+	echo "equal"
+elif [ $var1 != $var2 ]
+then
+	echo "not equal"
+fi
+
+case "$var1" in			# Switch문
+	10)
+		echo "10!"
+	;;
+	20)
+		echo "20!"
+	;;
+	*)
+		echo "other!"
+	;;
+esac
+
+while [ $var2 -lt $var1 ]	# 반복문
+do
+	echo $var2
+	var2=`expr $var2 + 1`
+done
+
+for var in 0..4			# 반복문
+do
+	echo $var
+done
+
+MyFunction() {
+	echo "This is Function."
+}
+
+MyFunction
+```
+
+위 예시들을 이용해서 원하는 대로 스크립트를 작성해 보다 쉽게 명령어들을 사용할 수 있다.
+
 # Oracle
 
 ## RDBMS의 특징
 
+### DBMS
+
+DataBase Management System의 약자이다.
+DB를 관리하는 시스템을 말한다.
+
+사용자와 DB 사이에서 사용자의 요구에 따라 데이터를 생성, 삭제, 변경해주고 DB를 관리해주는 소프트웨어이다.
+
+### RDB
+
+Relational DataBase의 약자이다.
+관계형 모델에 기초를 둔 DB이다.
+모든 데이터를 2차원 테이블 형태로 표현한다.
+
+### RDBMS
+
+Relational DataBase Management System의 약자이다.
+RDBMS는 관계형 모델을 기반으로 하는 DBMS 유형이다.
+
+RDBMS의 테이블은 서로 연관되어 있어 일반 DBMS보다 효율적으로 데이터를 저장, 구성, 관리할 수 있다.
+정규화를 통해 데이터의 중복성을 최소화 할 수 있다.
+데이터의 원자성, 일관성, 독립성, 내구성을 유지하며 데이터 무결성을 높인다.
+MSSQL, PostgreSQL, Tibero, MySQL, Oracle등이 예시이다.
+
+### Transaction
+
+DB의 상태를 변화시키기 위해 수행하는 작업의 단위이다.
+SQL문을 이용해 DB에 접근할 경우 DB의 상태가 바뀔 수 있다.
+작업의 단위는 SQL문 하나가 아닌 Transaction의 시작과 종료로 Commit이라고 생각하는 것이 편하다.
+
+트랜잭션은 네 가지 특징이 있다.
+
+| 특징                | 설명                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| Atomicity(원자성)   | Transaction이 DB에 모두 반영되거나 전혀 반영되지 않는다.<br />Transaction이 수행되다가 중간에 종료되는 경우 이전 내용들을 Rollback한다. |
+| Consistency(일관성) | Transaction의 작업 처리 결과가 항상 일관성이 있어야 한다.<br />Transaction이 진행되는 동안에 DB가 변경되어도 처음 Transaction을 진행하기 위해 참조한 DB로 진행된다. |
+| Isolation(독립성)   | 둘 이상의 Transaction이 동시에 실행되는 경우 하나의 Transaction이 나머지 Transaction의 연상에 끼어들 수 없다. |
+| Durability(지속성)  | Transaction이 성공적으로 완료되었을 경우 결과가 영구적으로 DB에 반영이 된다. |
+
+### SQL
+
+구조적 쿼링 언어(Structured Query Language)의 약어이다.
+RDB에 정보를 저장하고 처리하기 위한 프로그래밍 언어이다.
+SQL문(SQL Statement)를 사용하여 DB에서 정보를 삽입, 변경, 제거, 검색할 수 있다.
+
+#### SQL의 종류
+
+SQL의 종류로는 DDL, DML, DCL, DQL, TCL 등이 있다.
+주로 분류를 할 때는 DDL, DML, DCL로만 분류한다.
+
+##### Data Definition Language(데이터 정의어)
+
+-   CREATE
+-   ALTER
+-   DROP
+-   TRUNCATE
+
+##### Data Manipluation Language(데이터 조작어)
+
+-   SELECT
+-   INSERT
+-   UPDATE
+-   DELETE
+
+##### Data Control Language(데이터 제어어)
+
+-   GRANT
+-   REVOKE
+-   COMMIT
+-   ROLLBACK
+
+##### Data Query Language(데이터 쿼리어)
+
+정해진 스키마 내에서 쿼리할 수 있는 언어로 DML의 일부분으로 취급하기도 한다.
+
+-   SELECT
+-   WHERE
+-   DISTINCT
+-   GROUP BY
+-   ORDER BY
+
+##### Transaction Control Language(트랜잭션 제어어)
+
+DML을 거친 데이터의 변경사항을 수정할 수 있다.
+
+-   COMMIT
+-   ROLLBACK
+
 ## Oracle Standalone 설치
+
+### [Download](https://edelivery.oracle.com)
+
+Oracle Software Delivery Cloud에 가서 원하는 설치 파일을 다운로드 받는다.
+
+<img src="./assets/image-20231108144602451.png" alt="image-20231108144602451" style="zoom: 33%;" />
+
+<img src="./assets/image-20231108144634839.png" alt="image-20231108144634839" style="zoom:33%;" />
+
+<img src="./assets/image-20231108144645176.png" alt="image-20231108144645176" style="zoom:33%;" />
+
+### User, Group 생성
+
+```bash
+groupadd dba			# dba group 생성
+useradd -g dba oracle	# dba group에 oracle user 생성
+passwd oracle			# oracle의 비밀번호 설정
+```
+
+### Oracle User Environment Variable 설정
+
+```bash
+vi ~oracle/.bash_profile
+```
+
+```bash
+export TMP=/tmp
+export TMPDIR=$TMP
+export ORACLE_BASE=<oracle_base>	# ex) /app/oracle
+export ORACLE_HOME=<oracle_home>	# ex) $ORACLE_BASE/product/19.3/db_home
+export ORACLE_SID=<oracle_sid>		# ex) orcl
+export NLS_LANG=<nls_lang>			# ex) AMERICAN_AMERICA.AL32UTF8
+export TNS_ADMIN=<tns_admin>		# ex) $ORACLE_HOME/network/admin
+export ORACLE_HOSTNAME=<hostname>	# ex) localhost
+export LD_LIBRARY_PATH=<path>		# ex) $ORACLE_HOME/lib:$LD_LIBRARY_PATH
+export PATH=<path>					# ex) $ORACLE_HOME/bin:$PATH
+```
+
+### Oracle 설치 Directory 생성
+
+```bash
+source ~oracle/.bash_profile
+mkdir -p $ORACLE_HOME
+chown -R oracle:dba /app
+```
+
+### 의존 Library 설치
+
+```bash
+yum -y install compat-libstdc++-33.x86_64 binutils elfutils-libelf elfutils-libelf-devel
+yum -y install glibc glibc-common glibc-devel glibc-headers gcc gcc-c++ libaio libaio-devel
+yum -y install libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel
+yum -y install unzip wget ksh
+yum -y install https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-19c-1.0-3.el7.x86_64.rpm
+```
+
+### Download한 File Unzip
+
+```bash
+su - oracle
+```
+
+```bash
+mv <oracle_zip> $ORACLE_HOME
+cd $ORACLE_HOME
+unzip <oracle_zip>
+```
+
+### Run Installer
+
+```bash
+./runInstaller
+```
+
+<img src="./assets/image-20231108145806215.png" alt="image-20231108145806215" style="zoom: 50%;" /><img src="./assets/image-20231108145829600.png" alt="image-20231108145829600" style="zoom:50%;" /><img src="./assets/image-20231108145843059.png" alt="image-20231108145843059" style="zoom:50%;" /><img src="./assets/image-20231108145900949.png" alt="image-20231108145900949" style="zoom:50%;" /><img src="./assets/image-20231108145915752.png" alt="image-20231108145915752" style="zoom:50%;" /><img src="./assets/image-20231108145938958.png" alt="image-20231108145938958" style="zoom:50%;" /><img src="./assets/image-20231108145949882.png" alt="image-20231108145949882" style="zoom:50%;" /><img src="./assets/image-20231108150004532.png" alt="image-20231108150004532" style="zoom:50%;" /><img src="./assets/image-20231108150016305.png" alt="image-20231108150016305" style="zoom:50%;" /><img src="./assets/image-20231108150029558.png" alt="image-20231108150029558" style="zoom:50%;" /><img src="./assets/image-20231108150041295.png" alt="image-20231108150041295" style="zoom:50%;" /><img src="./assets/image-20231108150111171.png" alt="image-20231108150111171" style="zoom:50%;" /><img src="./assets/image-20231108150119421.png" alt="image-20231108150119421" style="zoom:50%;" /><img src="./assets/image-20231108150140956.png" alt="image-20231108150140956" style="zoom:50%;" /><img src="./assets/image-20231108150153560.png" alt="image-20231108150153560" style="zoom:50%;" /><img src="./assets/image-20231108150214427.png" alt="image-20231108150214427" style="zoom:50%;" /><img src="./assets/image-20231108150225329.png" alt="image-20231108150225329" style="zoom:50%;" /><img src="./assets/image-20231108150236834.png" alt="image-20231108150236834" style="zoom:50%;" /><img src="./assets/image-20231108150254399.png" alt="image-20231108150254399" style="zoom:50%;" /><img src="./assets/image-20231108150307759.png" alt="image-20231108150307759" style="zoom:50%;" />
+
+### 설치되었는지 확인
+
+```bash
+sqlplus -version
+
+sqlplus / as sysdba
+```
+
+```sql
+shutdown immediate
+startup
+exit
+```
+
+```bash
+lsnrctl start
+lsnrctl status
+```
 
 ## Oracle Admin
 
 ### Startup
 
+```sql
+STARTUP [FORCE] [RESTRICT] [PFILE=<filename>] [OPEN [RECOVER] [<db>] | MOUNT | NOMOUNT]
+```
+
+- `FORCE`
+    - Oracle DB가 시작된 상태에서 다시 재시작할 때만 사용한다.
+- `RESTRICT`
+    - DBA 권한을 가진 USER만이 connect하여 Oracle DB를 이용할 수 있다.
+- `PFILE`
+    - Oracle이 기본으로 제공되는 파라미터 파일인 INIT.ORA파일이 아닌 관리자가 생성한 파라미터 파일을 사용하여 오라클 서버를 시작할 때 사용한다.
+
 ### Shutdown
 
-### Oracle 논리적 구조
+```SQL
+SHUTDOWN [NORMAL | TRANSACTIONAL | IMMEDIATE | ABORT]
+```
 
-### 오라클 물리적 구조
+-   `NORMAL`
+    -   새로운 DB Connection을 허락하지 않는다.
+    -   현재 USER들이 맺고 있는 Connection들은 Disconnect할 때 까지 기다린다.
+    -   다음 DB STARTUP 시 Instance Recovery 절차가 필요하지 않다.
+-   `TRANSACTIONAL`
+    -   모든 Client가 새로운 Transaction을 시작할 수 없다.
+    -   Client들의 진행중인 Transaction을 종료하면 서버가 종료된다.
+    -   다음 DB STARTUP 시 Instance Recovery 절차가 필요하지 않다.
+-   `IMMEDIATE`
+    -   현재 처리중인 SQL Statement가 있을 시 모두 Stop 시킨다.
+    -   Uncommitted Transaction이 있다면 다 Rollback 시킨다.
+    -   USER들이 Disconnect 할 때 까지 기다리지 않고 DB를 Close & Dismount하여 Oracle Instance를 SHUTDOWN시킨다.
+    -   다음 DB STARTUP 시 Instance Recovery 절차가 필요하지 않다.
+-   `ABORT`
+    -   현재 처리중인 SQL Statement들을 모두 Abort 시키고 Rollback 시키지 않는다.
+    -   USER들을 Disconnect 시키며 Close와 Dismount 없이 강제 종료한다.
+    -   DB가 비정상 종료된 후 다음 DB STARTUP 시 Intance Recovery 절차가 필요하다.
+        -   SMON에 의해 Instance Recovery 절차가 자동으로 수행된다.
+
+### Tablespace 및 Data File 관리
+
+#### Tablespace
+
+-   하나의 DB 안에 가장 큰 논리적 공간이다.
+-   업무의 단위나 사용 용도에 따라 여러 개의 Tablespace로 분리되어 관리된다.
+-   Segment(Object)라는 논리적 저장 공간의 집합이다.
+
+##### Tablespace의 종류
+
+![image-20231108155625715](./assets/image-20231108155625715.png)
+
+종류는 크게 3개로 나뉘며 필수 Tablespace는 4개이다.
+
+-   Permanent Tablespace
+    -   영구 Tablespace이다.
+    -   가장 일반적인 Tablespace로 데이터 축적 용도로 사용한다.
+    -   임의로 USERS나 EXAMPLES 처럼 원하는 데이터를 저장할 수 있다.
+    -   SYSTEM
+        -   DB의 기본 정보들을 담고 있는 Data Dictionary Table이 저장되는 공간이다.
+        -   일반 사용자들의 Object들을 저장하지 않는 것을 권장한다.
+            -   사용자들의 Object에 문제가 생겨 DB가 종료되면 완벽한 복구가 불가능해지기 때문이다.
+    -   SYSAUX
+        -   SYSTEM Tablespace의 보조이다.
+        -   SYSAUX Tablespace에 문제가 생기면 시스템 상 문제가 없으나 SYSAUX Tablespace에 저장되어 있는 요소들의 기능은 사용 불가해진다.
+-   Undo Tablespace
+    -   읽기 일관성을 유지하기 위해 사용한다.
+    -   Rollback하는 경우를 대비해 DML 발생 때 수정 이전 값을 UNDO Segment에 저장한다.
+-   Temporary Tablespace
+    -   사용자 쿼리 요청으로 정렬하는 작업이 필요할 때 메모리의 부담을 덜어주기 위해 사용된다.
+
+#### Data File
+
+-   Tablespace의 물리적 파일 형태이다.
+-   하나 이상의 Data File이 모여 Tablespace를 형성한다.
+
+#### Tablespace 생성
+
+##### CREATE PERMANENT TABLESPACE
+
+```sql
+CREATE [BIGFILE | SMALLFILE(DEFAULT)] TABLESPACE <tablespace>
+DATAFILE '<path>' SIZE <size> [EXTENT MANAGEMENT [DICTIONARY | LOCAL(DEFAULT) [AUTOALLOCATE(DEFAULT) | UNIFORM SIZE <size>]]]
+[SEGMENT SPACE MANAGEMENT [AUTO(DEFAULT) | MANUAL]];
+```
+
+```SQL
+-- EX)
+CREATE TABLESPACE TS1 DATAFILE '/app/tablespace1.dbf' SIZE 100M;
+
+SELECT TABLESPACE_NAME, CONTENTS, EXTENT_MANAGEMENT, ALLOCATION_TYPE, SEGMENT_SPACE_MANAGEMENT, BIGFILE
+FROM DBA_TABLESPACES WHERE TABLESPACE_NAME = 'TS1';
+```
+
+##### CREATE TEMPORARY TABLESPACE
+
+```sql
+CREATE [BIGFILE | SMALLFILE] TEMPORARY TABLESPACE <temp_tablespace>
+TEMPFILE '<path>' SIZE <size> [EXTENT MANAGEMENT [DICTIONARY | LOCAL [AUTOALLOCATE | UNIFORM SIZE <size>]]];
+```
+
+```SQL
+-- EX)
+CREATE TEMPORARY TABLESPACE TEMPTS1 TEMPFILE '/app/temp_tablespace1.dbf' SIZE 100M;
+```
+
+##### CREATE UNDO TABLESPACE
+
+```SQL
+CREATE [BIGFILE | SMALLFILE] UNDO TABLESPACE <undo_tablespace>
+DATAFILE '<path>' SIZE <size> [EXTENT MANAGEMENT [DICTIONARY | LOCAL [AUTOALLOCATE]]];
+```
+
+-   UNDO Tablespace는 사이즈를 지정할 수 없다.
+-   SEGMENT SPACE MANAGEMENT는 MANUAL만 가능하다.
+
+##### ADD / DROP TABLESPACE DATAFILE
+
+```SQL
+-- ADD)
+ALTER TABLESPACE <tablespace> ADD DATAFILE '<path>' SIZE <size>;
+
+-- DROP)
+ALTER TABLESPACE <tablespace> DROP DATAFILE <file_id>;
+```
+
+##### DROP TABLESPACE
+
+```SQL
+DROP TABLESPACE <table_spacename> INCLUDING CONTENTS AND DATAFILES;
+```
+
+-   CONTENTS: 모든 Segment들을 삭제한다.
+-   DATAFILES: 모든 Data File들을 삭제한다.
+
+##### BIGFILE
+
+-   Data File을 하나만 사용할 수 있다.
+-   ASM이 생기며 만들어졌다.
+
+##### SMALLFILE
+
+-   여러 개의 디스크에 균등히 수동으로 Data File을 생성한다.
+
+##### EXTENT MANAGEMENT
+
+-   Tablespace의 공간 할등은 Extent 단위로 진행된다.
+-   DML 작업이 반복되며 Extent의 할당과 반환이 발생하는 데 어느 Extent를 사용해도 되는 지에 관한 정보 관리가 필요하다.
+-   해당 방법에는 DICTIONARY와 LOCAL 방법이 있다.
+    -   DICTIONARY
+        -   사용 가능한 Extent에 대한 정보를 Data Dictionary에서 관리하는 방법이다.
+        -   Segment마다 다른 Extent 크기를 설정할 수 있다.
+        -   Data Dictionary에 대한 경합 발생 가능성이 높아 사용되지 않는다.
+    -   LOCAL
+        -   Data File Header에 Bitmap을 통해 Extent의 사용 유무를 관리한다.
+        -   Resource의 사용량이 높아지나 중요한 Object 경합을 줄이는 것이 더 중요해 생겼다.
+        -   AUTOALLOCATE 옵션을 사용하면 자동을 Extent의 크기를 정하도록 위임 가능하다.
+        -   UNIFORM 옵션을 사용하면 모든 Extent의 크기를 동일하게 설정 가능하다.
+
+##### SEGMENT SPACE MANAGEMENT
+
+-   Segment의 공간 관리에 대한 옵션이다.
+-   Tablespace의 공간 관리를 어떻게 할 것인가를 묻는 옵션이다.
+
+```sql
+SELECT TABLESPACE_NAME, SEGMENT_SPACE_MANAGEMENT FROM DBA_TABLESPACES;
+
+TABLESPACE_NAME		SEGMENT_SPACE_MANAGEMENT
+------------------  ------------------------
+SYSTEM				MANUAL
+SYSAUX				AUTO
+UNDOTBS1			MANUAL
+TEMP				MANUAL
+USERS				AUTO
+```
+
+-   해당 방법에는 MANUAL과 AUTO가 있다.
+
+    -   MANUAL
+
+        -   Freelist를 사용해 INSERT가 가능한 블럭을 확인 가능하다.
+        -   Free List Management라고도 한다.
+            -   PCTUSED: 일정 백분위 이하로 사이즈가 줄어들면 Freelist에 블럭을 등록하는 크기이다.
+            -   PCTFREE: 일정 백분위 이하로 데이터 변경에 대비해 확보해 놓은 Block Size 크기이다.
+                ![image-20231108161720159](./assets/image-20231108161720159.png)
+
+        -   PCTFREE가 넘어갈 경우 Freelist에서 사용 가능한 다음 블럭을 사용한다.
+            PCTUSED 이상인 블럭들 밖에 없어 Freelist에서 사용 가능한 블럭이 없을 경우 새로운 Extent를 할당해야 한다.
+
+    -   AUTO
+
+        -   Bitmap을 이용해 비어있는 블럭을 확인한다.
+        -   네 개의 등급으로 나누고 총 여섯 가지 상태를 나타내는 Bitmap 블럭을 사용해 Segment를 관리한다.
+        -   ASSM(Automatic Space Segment Management)이라고도 부른다.
+            -   Full: INSERT가 더이상 일어날 수 없다.
+            -   FS1: 0~25%의 여유 공간이 Block에 존재
+            -   FS2: 25~50%의 여유 공간이 Block에 존재
+            -   FS3: 50~75%의 여유 공간이 Block에 존재
+            -   FS4: 75~100%의 여유 공간이 Block에 존재
+            -   Never Used: 비어 있음
+        -   ASSM은 Freelist 대신 3단계 Bitmap Block을 이용해 효율적으로 Segment 공간을 관리한다.
+            -   L1BMB(Level 1 BitMap Block): 각 Block의 Freeness Status를 관리하는 역할을 한다.
+                Segment의 크기에 따라 16~1024개의 Block 상태를 관리한다.
+            -   L2BMB: L1BMB의 목록을 관리한다.
+                L1BMB DBA, L1BMB가 관리하는 Block들의 Maximun Freeness, Owning Instance 등을 관리한다.
+            -   L3BMB: L2BMB의 목록을 관리한다.
+                대부분 별도의 물리적인 Block으로 존재하지 않고 Segment Header Block 내부에 존재한다.
+                Segment 크기가 커서 하나의 L3BMB로 관리 불가능할 때 별도의 L3BMB가 물리적으로 분리된다.
+
+
 
 ### 유저 생성 / 삭제 / 권한 부여 / 권한 강탈
 
 #### 유저 생성
 
+```sql
+CREATE USER <id> IDENTIFIED BY <pw> [DEFAULT TABLESPACE <tablespace>] [TEMPORARY TABLESPACE <temp_tablespace>];
+```
+
 #### 유저 삭제
+
+```SQL
+DROP USER <id> [CASECADE];
+```
+
+-   CASCADE: 해당 스키마에 Object가 존재하면 삭제할 수 없다.
+    CASCADE 키워드를 통해 스키마에 속한 모든 Object를 함께 삭제할 수 있다.
 
 #### 유저 권한 부여
 
+```sql
+GRANT <privilege> TO <id>;
+```
+
 #### 유저 권한 강탈
+
+```SQL
+REVOKE <privilege> TO <id>;
+```
 
 ### 테이블 생성 / 삭제
 
 #### 테이블 생성
 
+```SQL
+CREATE TABLE <table>(
+	<column> <type> <constraint>,
+	...
+);
+```
+
 #### 테이블 삭제
+
+```SQL
+-- 데이터와 테이블 삭제
+DROP TABLE <table>;
+
+-- 테이블과 데이터, 제약조건 삭제
+DROP TABLE <table> CASCADE CONSTRAINTS;
+
+-- 테이블과 데이터를 휴지통에 넣지 않고 삭제
+DROP TABLE <table> PURGE;
+
+-- 테이블, 데이터, 제약조건 휴지통에 넣지 않고 삭제
+DROP TABLE <table> CASCADE CONSTRAINTS PURGE;
+```
+
+#### 테이블 변경
+
+```SQL
+-- 이름 변경
+ALTER TABLE <table> RENAME TO <new_table>;
+
+-- Column 이름 변경
+ALTER TABLE <table> RENAME COLUMN <column> TO <new_column>;
+
+-- Column Data Type 변경
+ALTER TABLE <table> MODIFY <column> TO <datatype>;
+
+-- Column 추가
+ALTER TABLE <table> ADD <column> <datatype>;
+
+-- Column 삭제
+ALTER TABLE <table> DROP COLUMN <column>;
+
+-- 제약조건 추가
+ALTER TABLE <table> ADD CONSTRAINTS <constraint_name> <constraint> (<column>, ...);
+
+-- 제약조건 삭제
+ALTER TABLE <table> DROP CONSTRAINTS <constraint_name>;
+```
+
+#### 테이블 복사(CTAS)
+
+-   테이블 구조 변경 전 테스트를 위해 복사하거나 백업 용도로 사용된다.
+
+```SQL
+-- TABLE 구조와 데이터 모두 복사
+CREATE TABLE <table> AS SELECT <column>, ... FROM <source_table>;
+```
 
 ### 데이터 조회 / 생성 / 변경 / 삭제
 
 #### 데이터 조회
 
+```sql
+SELECT [<column> | * | <aggregate_function>] FROM <table> [WHERE <expression>]
+[GROUP BY <column> [HAVING <expression>]]
+[ORDER BY <column> [(ASC(DEFAULT) | DESC)]];
+```
+
 #### 데이터 생성
+
+```sql
+INSERT INTO <table> [(<column>, ...) | ] VALUES (<value>, ...);
+```
 
 #### 데이터 변경
 
+```SQL
+UPDATE <table> SET <column> = <value>, ... [WHERE <expression>];
+```
+
 #### 데이터 삭제
+
+```SQL
+DELETE FROM <table> [WHERE <expression>];
+```
 
 ### Procedure
 
+DB에 대한 일련의 작업을 정리한 절차를 RDBMS에 저장한 것이다.
+넓은 의미로 어떤 업무를 수행하기 위한 절차를 뜻한다.
+쿼리문을 하나의 메소드 형식으로 만들고 어떤 동작을 일괄적으로 처리하는 용도로 쓰인다.
+
+| Procedure                            | Function                         |
+| ------------------------------------ | -------------------------------- |
+| 특정한 작업을 수행한다.              | 특정한 계산을 수행한다.          |
+| 리턴 값을 가질 수도, 아닐 수도 있다. | 리턴 값을 반드시 가진다.         |
+| 리턴 값을 여러 개 가질 수 있다.      | 리턴 값을 하나만 가질 수 있다.   |
+| 서버(DB)에서 기술한다.               | 화면(Client)에서 기술한다.       |
+| 수식 내에서 사용 불가하다.           | 수식 내에서만 사용 가능하다.     |
+| 단독으로 문장 구성이 가능하다.       | 단독으로 문장 구성이 불가능하다. |
+
 #### PL/SQL
+
+Procedural Language extension to Structured Query Language의 약자이다.
+Oracle에서 지원하는 프로그래밍 언어의 특성을 수용한 SQL의 확장이다.
+PL/SQL Block 내에서 SQL의 DML문과 Query문, 절차형 언어(If / Loop) 등을 사용하여 절차적 프로그래밍을 가능하게 한 트랜잭션 언어이다.
+
+선언부, 실행부, 예외처리부로 총 세 개의 Section으로 구성된다.
+
+```plsql
+DECLARE		-- 선언부
+BEGIN		-- 실행부 시작
+END;		-- 실행부 종료
+EXCEPTION	-- 예외처리부
+```
+
+PL/SQL의 종류는 크게 다섯 개로 나눌 수 있다.
+
+1.   
 
 #### Procedure 생성
 
@@ -746,6 +1320,60 @@ Unix 환경에서 가장 많이 쓰이는 문서 편집기이다.
 ### Oracle Instance
 
 ### Oracle Database
+
+#### Oracle 논리적 / 물리적 구조
+
+![image-20231108151458287](./assets/image-20231108151458287.png)
+
+Oracle의 논리적 구조는 DB, Tablespace, Segment, Extent, Oracle Data Block으로 이루어져 있다.
+논리적 구조에 해당하는 물리적 구조는 Oracle Data Block은 OS Block에 해당하며 OS에 생성된 File(.dbf 등등)들 N개가 하나의 Tablespace에 해당한다.
+Tablespace의 경우 여러 Tablespace가 하나의 OS File에 존재할 수 없으며 Tablespace 당 N개의 OS File을 가진다.
+
+##### Oracle Data Block
+
+-   실제 데이터가 기록된다.
+-   Block Header에는 Block을 관리하기 위한 데이터가 있다.
+-   Oracle에서 공간을 할당하는 최소 단위이다.
+-   2, 4, 8, 16, 32KB 등 크기가 다양하다.
+-   Oracle Data Block 한 개는 OS Block N개가 모여 생성된다.
+
+##### Extent
+
+-   여러 개의 연속된 Oracle Data Block의 집합이다.
+-   테이블에 데이터가 없어도 자동 할당되며 최초 Extent 할당을 다 사용했을 시 추가로 생성할 수 있다.
+-   Extent의 크기는 Segment 생성 시 `STORAGE`라는 Parameter로 수동으로 지정 가능하다.
+    -   `STORAGE` Parameter 생략 시 Tablespace의 기본 설정 값을 적용 받는다(Minimal 64KB)
+-   테이블 별로 Block의 구역을 나눠 저장하여 검색 범위를 줄이는 데에 Extent가 사용된다.
+
+##### Segement
+
+-   여러개의 Extent들의 집합이다.
+-   Table, Index, Undo, Temp와 같이 저장 공간을 필요로 하는 Object이다.
+-   Segment의 여러 Extent 중 가장 첫 번째의 첫 Block에 Segment Header가 존재한다.
+-   Segment Header에 해당 Segment의 종류에 대한 정보가 들어가며 Extent의 할당 상태와 공간 사용 내역이 들어간다.
+
+##### Tablespace
+
+-   Segment들의 집합이다.
+-   Table이 존재하는 공간이다.
+
+##### Segment의 증가
+
+![image-20231108152440276](./assets/image-20231108152440276.png)
+
+Segment에는 High Water Mark(이하 HWM)가 존재한다.
+
+Segment Header에 있으며 모든 Segment 당 하나씩 존재한다.
+저장 공간을 갖는 Segment 영역에서 사용한 적이 있는 Block과 사용한 적이 없는 Block의 경계점을 나타낸다.
+HWM 이전 블록에만 저장 가능하며 데이터를 넣기 위해 HWM는 증가할 수 있으나 데이터가 제거되어도 감소하지 않는다.
+DB를 스캔할 때 HWM까지 Data Block 전체를 확인한다.
+Table Drop이나 Truncate를 통해 Table을 초기화하여 HWM를 초기화할 수 있다.
+
+| 명령어   | 종류      | 설명          | Rollback 여부     | HWM 여부           |
+| -------- | --------- | ------------- | ----------------- | ------------------ |
+| DELETE   | DML       | 데이터 삭제   | 가능(COMMIT 이전) | 유지               |
+| TRUNCATE | DML / DDL | 테이블 초기화 | 불가              | 해제               |
+| DROP     | DDL       | 테이블 살제   | 불가              | 삭제로 인해 사라짐 |
 
 ## Backup & Recovery
 
