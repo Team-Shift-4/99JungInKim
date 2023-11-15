@@ -45,42 +45,42 @@
 
 ## Shared Pool
 
-- Library Cache와 데이터 사전 캐시(Data Dictionary Cache)로 구성
-- 하나의 데이터베이스에 실행되는 모든 SQL 문을 처리하기 위해 사용
-- 문장 실행을 위해 그 문장과 관련된 실행 계획과 구문 분석 정보가 포함됨
-- 사이즈는 `SHARED_POOL_SIZE` 파라미터 값으로 결정
+- Library Cache와 데이터 사전 캐시(Data Dictionary Cache)로 구성한다.
+- 하나의 데이터베이스에 실행되는 모든 SQL 문을 처리하기 위해 사용한다.
+- 문장 실행을 위해 그 문장과 관련된 실행 계획과 구문 분석 정보가 포함된다.
+- 사이즈는 `SHARED_POOL_SIZE` 파라미터 값으로 결정한다.
 
 ### Library Cache
 
-- 가장 최근에 사용된 SQL 문장의 명령문, 구문 분석 트리, 실행 계획 정보를 가짐
-- LRU 알고리즘으로 관리
-- Shared SQL과 Shared PL/SQL 영역으로 구분
-    - Shared SQL 영역: SQL문장에 대한 실행계획과 파싱 트리를 저장하고 공유
-    동일한 문장이 다시 실행되면 Shared SQL 영역에 저장되어 있는 실행 계획과 파싱 트리를 그대로 이용하기에 SQL 문장 처리 속도 향상
-    - Shared PL/SQL 영역: 가장 최근에 실행한 PL/SQL 문장을 저장하고 공유
-    파싱 및 컴파일 된 프로그램 및 프로시져(함수, 패키지, 트리거)가 저장
+- 가장 최근에 사용된 SQL 문장의 명령문, 구문 분석 트리, 실행 계획 정보를 가진다.
+- LRU 알고리즘으로 관리된다.
+- Shared SQL과 Shared PL/SQL 영역으로 구분한다.
+    - Shared SQL 영역: SQL문장에 대한 실행계획과 파싱 트리를 저장하고 공유한다.
+    동일한 문장이 다시 실행되면 Shared SQL 영역에 저장되어 있는 실행 계획과 파싱 트리를 그대로 이용하기에 SQL 문장 처리 속도가 향상된다.
+    - Shared PL/SQL 영역: 가장 최근에 실행한 PL/SQL 문장을 저장하고 공유한다.
+    파싱 및 컴파일 된 프로그램 및 프로시져(함수, 패키지, 트리거)가 저장한다.
 
 ### Data Dictionary Cache
 
-- 테이블, 컬럼, 사용자 이름, 사용 권한 같은 가장 최근에 사용된 데이터 사전의 정보를 저장
-- 구문 분석 단계에서 서버 프로세스는 SQL문에 지정된 오브젝트 이름을 찾아내고 접근 권한을 검증하기 위해 Dictionary Cache의 정보를 찾음
+- 테이블, 컬럼, 사용자 이름, 사용 권한 같은 가장 최근에 사용된 데이터 사전의 정보를 저장한다.
+- 구문 분석 단계에서 서버 프로세스는 SQL문에 지정된 오브젝트 이름을 찾아내고 접근 권한을 검증하기 위해 Dictionary Cache의 정보를 찾는다.
 
 ## DataBase Buffer Cache
 
-- 가장 최근에 사용된 데이터를 저장하는 메모리 공간
-- 디스크에 완전히 쓰여지지 않는 수정된 데이터를 보유할 수도 있음
-- DB Buffer Cache에서 찾고 있으면 반환: Logical Read
-- DB Buffer Cache에 없어서 Free Buffer를 확보 후 Disk에서 찾아 Cache하여 반환: Physical Read
-- LRU 알고리즘에 의하여 가장 오래전에 사용된 것은 Disk에 저장, Memory에는 가장 최근에 사용된 데이터를 저장함으로, Disk I/O이 줄어들고, DBS의 성능이 증가
-    - LRU List: Buffer Block들의 상태를 관리하는 list
-        1. 많은 사용자가 동시에 Physical Read를 하여 동시에 DB Buffer Cache의 Free Buffer를 찾으려 할 때 LRU List 참조
-        2. 동시성 관리를 위해 순번 제공(Latch)
-        3. 본인 순번이 올 때까지 대기
+- 가장 최근에 사용된 데이터를 저장하는 메모리 공간이다.
+- 디스크에 완전히 쓰여지지 않는 수정된 데이터를 보유할 수도 있다.
+- DB Buffer Cache에서 찾고 있으면 반환한다.(Logical Read)
+- DB Buffer Cache에 없어서 Free Buffer를 확보 후 Disk에서 찾아 Cache하여 반환한다.(Physical Read)
+- LRU 알고리즘에 의하여 가장 오래전에 사용된 것은 Disk에 저장, Memory에는 가장 최근에 사용된 데이터를 저장함으로, Disk I/O이 줄어들고, DBS의 성능이 증가한다.
+    - LRU List: Buffer Block들의 상태를 관리하는 리스트이다.
+        1. 많은 사용자가 동시에 Physical Read를 하여 동시에 DB Buffer Cache의 Free Buffer를 찾으려 할 때 LRU List 참조한다.
+        2. 동시성 관리를 위해 순번 제공한다.(Latch)
+        3. 본인 순번이 올 때까지 대기한다.
 - Buffer Status
-    - `Free`: 사용해도 되는 Buffer
-    - `Clean`: Buffer의 Data와 DB File 내의 Data가 일치하는 상태
-    - `Pinned`: 현재 사용중인 Buffer, 누군가 읽거나 변경하고 있는 상태
-    - `Dirty`: Buffer의 Data와 DB File 내의 Data가 일치하지 않는 상태
+    - `Free`: 사용해도 되는 Buffer이다.
+    - `Clean`: Buffer의 Data와 DB File 내의 Data가 일치하는 상태이다.
+    - `Pinned`: 현재 사용중인 Buffer, 누군가 읽거나 변경하고 있는 상태이다.
+    - `Dirty`: Buffer의 Data와 DB File 내의 Data가 일치하지 않는 상태이다.
 - ~Oracle 8i: `DB_BLOCK_SIZE`와 `DB_BLOCK_BUFFERS`를 곱해 DB Buffer Cache의 크기를 결정
   Oracle 9i~: `DB_BLOCK_BUFFERS`를 Deprecated 시키고, `DB_CACHE_SIZE` 라는 파라미터가 도입
     - `DB_BLOCK_SIZE`: DB Buffer Cache의 블록 크기
@@ -120,32 +120,34 @@ SYSTEM TABLESPACE는 이 BLOCK SIZE를 이용
 
 ## Redo Log Buffer
 
-- 데이터베이스에서 일어난 모든 변화를 저장하는 메모리 공간
-- 장애 발생 시 Recovery를 위함
-- Redo Log Buffer에 기록되지 않는 경우
+- 데이터베이스에서 일어난 모든 변화를 저장하는 메모리 공간이다.
+- 장애 발생 시 Recovery를 위해 존재한다.
+    - 만약 Log를 남길 수 없는 경우에는 DB가 종료되거나 대기한다.
+
+- Redo Log Buffer에 기록되지 않는 경우는 아래와 같다.
     - Direct Load
     - table이나 index의 nologging 옵션인 경우
-        - table nologging 시 DML의 경우 제한적으로 Redo Log에 기록
-- DB에서 발생한 모든 변화는 LGWR에 의해 리두 로그 파일에 저장
-- Redo Log Buffer는 Database의 변경 사항 정보를 유지하는 SGA에 있는 Circular(순환) 버퍼
-- Redo Log Buffer의 크기는 Oracle Parameter `LOG_BUFFER`에서 지정
+        - table nologging 시 DML의 경우 제한적으로 Redo Log에 기록한다.
+- DB에서 발생한 모든 변화는 LGWR에 의해 리두 로그 파일에 저장한다.
+- Redo Log Buffer는 Database의 변경 사항 정보를 유지하는 SGA에 있는 Circular(순환) 버퍼이다.
+- Redo Log Buffer의 크기는 Oracle Parameter `LOG_BUFFER`에서 지정한다.
 
 ## **Java Pool & Large Pool & Streams Pool**
 
 ### **Java Pool**
 
-- 자바로 작성된 프로그램을 실행할 때 실행 계획을 저장하는 영역
-- `JAVA_POOL_SIZE` 파라미터로 관리되며, 기본 크기 24MB로 할당
+- 자바로 작성된 프로그램을 실행할 때 실행 계획을 저장하는 영역이다.
+- `JAVA_POOL_SIZE` 파라미터로 관리되며, 기본 크기 24MB로 할당한다.
 
 ### **Large Pool**
 
-- Oracle 백업 및 복원 작업에 대한 대용량 메모리 할당, I/O 서버 프로세스 및 다중 스레드 서버, Oracle XA에 대한 세션 메모리를 제공하는 SGA의 선택적인 영역
-- `LARGE_POOL_SIZE` 파라미터로 관리되며, 기본 크기는 0 byte
+- Oracle 백업 및 복원 작업에 대한 대용량 메모리 할당, I/O 서버 프로세스 및 다중 스레드 서버, Oracle XA에 대한 세션 메모리를 제공하는 SGA의 선택적인 영역이다.
+- `LARGE_POOL_SIZE` 파라미터로 관리되며, 기본 크기는 0 byte이다.
 
 ### Streams Pool
 
-- Oracle Streams 전용으로 사용되며 버퍼링된 Queue Message를 저장하고 Oracle Streams 캡처 Process 및 적용 Process에 대해 메모리를 제공하는 선택적인 영역
-- `STREAMS_POOL_SIZE` 파라미터로 관리되며, 기본 크기는 0 byte
+- Oracle Streams 전용으로 사용되며 버퍼링된 Queue Message를 저장하고 Oracle Streams 캡처 Process 및 적용 Process에 대해 메모리를 제공하는 선택적인 영역이다.
+- `STREAMS_POOL_SIZE` 파라미터로 관리되며, 기본 크기는 0 byte이다.
 
 ## Oracle 필수 Background Process
 
@@ -153,41 +155,42 @@ SYSTEM TABLESPACE는 이 BLOCK SIZE를 이용
 
 ### SMON(System MONitor)
 
-- Oracle Instance를 관리
-    - Instance Recovery 수행
-        - Startup 중 싱크 정보를 확인해 어긋날 경우 Redo Log Entires를 재실행 하여 서버의 싱크를 맞추는 과정
-        - 인스턴스 복구는 저장되는 것까지 고려해야함
-        1. DB  비정상 종료
-        2. STARTUP
-        3. MOUNT 단계에서 Data File의 SCN번호가 일치하지 않음 확인
-        4. Roll Forward
-            - Redo Log File의 정보를 Data File에 적용
-        5. OPEN 단계에서 Roll Back
-            - Undo Tablespace의 Undo Data를 사용해 Commit 되지 않은 내용 Roll Back
-- 데이터 파일의 빈 공간을 연결해 하나의 큰 빈공간으로 만듬
-- 더 이상 사용하지 않는 임시 세그먼트 제거 → 재사용 가능
-- 오라클 인스턴스 fail시 복구하는 역할
+- Oracle Instance를 관리한다.
+    - Instance Recovery 수행한다,
+        - Startup 중 싱크 정보를 확인해 어긋날 경우 Redo Log Entires를 재실행 하여 서버의 싱크를 맞추는 과정이 Instance Recovery이다.
+        - 인스턴스 복구는 저장되는 것까지 고려해야 한다.
+        - 아래는 순서이다.
+            1. DB  비정상 종료
+            2. STARTUP
+            3. MOUNT 단계에서 Data File의 SCN번호가 일치하지 않음 확인
+            4. Roll Forward
+                - Redo Log File의 정보를 Data File에 적용
+            5. OPEN 단계에서 Roll Back
+                - Undo Tablespace의 Undo Data를 사용해 Commit 되지 않은 내용 Roll Back
+- 데이터 파일의 빈 공간을 연결해 하나의 큰 빈공간으로 만든다.
+- 더 이상 사용하지 않는 임시 세그먼트 제거하여 재사용 가능하게 만든다.
+- 오라클 인스턴스 fail시 복구하는 역할을 한다.
 
 ### PMON(Process MONitor)
 
-- 오라클 서버에서 사용되는 각 프로세스들을 감시
-- 비정상 종료된 DB 접속을 정리
-- 정상적으로 작동하지 않는 프로세스를 감시해 종료, 비정상적 종료된 프로세스들에게 할당된 SGA 리소스를 재사용 가능하게 만듬
-- 커밋되지 않은 트랜잭션을 `ROLLBACK`시킴
+- 오라클 서버에서 사용되는 각 프로세스들을 감시한다.
+- 비정상 종료된 DB 접속을 정리한다.
+- 정상적으로 작동하지 않는 프로세스를 감시해 종료하여 비정상적 종료된 프로세스들에게 할당된 SGA 리소스를 재사용 가능하게 만든다.
+- 커밋되지 않은 트랜잭션을 `ROLLBACK`시킨다.
 
 ### DBWn(DataBase WRiter)
 
-- DB Buffer Cache에 있는 Dirty Block의 내용을 데이터 파일에 기록
-- DB Buffer Cache내의 충분한 수의 Free Buffer가 사용 가능해짐
-- LRU 알고리즘을 사용
-- n은 숫자로 DB Writer를 여러개 구성 가능
+- DB Buffer Cache에 있는 Dirty Block의 내용을 데이터 파일에 기록한다.
+- DB Buffer Cache내의 충분한 수의 Free Buffer가 사용 가능해진다.
+- LRU 알고리즘을 사용한다.
+- n은 숫자로 DB Writer를 여러개 구성 가능하다.
     - Default 1 or CPU_CONT/8 중 큰 쪽 1~100
-    - `DB_WRITER_PROCESSES` Parameter를 통해 설정 가능
+    - `DB_WRITER_PROCESSES` Parameter를 통해 설정 가능하다.
     - 처음 36개의 DB Writer Process의 이름은 DBW0-DBW9 및 DBWa-DBWz,
     37~100번째 DB Writer Process의 이름은 BW36-BW99
-    - 보통은 DBW0으로 충분하나 시스템에서 데이터를 많이 수정할 때 추가 Process를 구성 가능
-    - uniprocessor system(단일 프로세서 시스템)에서는 사용하지 않음
-- 발생하는 이벤트
+    - 보통은 DBW0으로 충분하나 시스템에서 데이터를 많이 수정할 때 추가 Process를 구성 가능하다.
+    - uniprocessor system(단일 프로세서 시스템)에서는 사용하지 않는다.
+- 발생하는 이벤트는 아래와 같다.
     - Dirty Buffer 수가 임계값 도달
     - 프로세스가 지정된 개수의 블록을 스캔 하고도 Free Buffer를 발견하지 못했을 때
     - 시간 초과
@@ -198,19 +201,19 @@ SYSTEM TABLESPACE는 이 BLOCK SIZE를 이용
 
 ### LGWR(LoG WRiter)
 
-- DB Buffer Cache의 모든 변화를 기록
-- SGA의 Redo Log Buffer에 생겨나며 트랜잭션이 완료되었을 때 Redo Log Buffer의 내용을 Online Redo Log File에 기록
+- DB Buffer Cache의 모든 변화를 기록한다.
+- SGA의 Redo Log Buffer에 생겨나며 트랜잭션이 완료되었을 때 Redo Log Buffer의 내용을 Online Redo Log File에 기록한다.
 
 ### CKPT(ChecK PoinT)
 
-- 모든 변경된 DB Buffer를 디스크 내의 데이터 파일로 저장하는 것을 보장
-- 변화된 데이터 블록 수, 일정 간격을 둬 DBWn이 Dirty Buffer를 데이터 파일로 저장하도록 명령
-- 발생시 데이터 파일과 컨트롤 파일의 헤더를 갱신
+- 모든 변경된 DB Buffer를 디스크 내의 데이터 파일로 저장하는 것을 보장한다.
+- 변화된 데이터 블록 수, 일정 간격을 두어 DBWn이 Dirty Buffer를 데이터 파일로 저장하도록 명령한다.
+- 발생시 데이터 파일과 컨트롤 파일의 헤더를 갱신한다.
 - 관련 오라클 파라미터
     - `LOG_CHECKPOINT_TIMEOUT`: CKPT가 발생할 시간 간격 설정(단위: Sec)
     - `LOC_CHECKPOINT_INTERVAL`: CKPT가 발생할 Redo Log File의 블록 수 지정
-- 발생 시점
-    - log switch change
+- 발생하는 이벤트는 아래와 같다.
+    - LOG SWITCH CHANGE
     - `LOG_CHECKPOINT_TIMEOUT`
         - 마지막 Redo Log 작성(tail of the log)으로 부터 설정한 시간(초 단위)
         - 해당 초 이후 Checkpoint 발생
@@ -270,37 +273,43 @@ SYSTEM TABLESPACE는 이 BLOCK SIZE를 이용
 
 ## User Process
 
-- 사용자가 오라클 Application Program을 실행 시켰을 때 사용되는 프로세스
-ex)SQL*Plus, Forms, Pro*C
-- 사용자가 오라클 서버에 접속할 때마다 사용자 프로세스가 생성
-- 사용자가 실행시킨 SQL문을 Server Process에 전달하고, 그 결과를 Server Process에게 받음
+- 사용자가 오라클 Application Program을 실행 시켰을 때 사용되는 프로세스이다.
+- 아래는 예시이다.
+  - SQL*Plus*
+  - Forms
+  - ProC
+  - DataGrip
+  - DBeaver
+
+- 사용자가 오라클 서버에 접속할 때마다 사용자 프로세스가 생성된다.
+- 사용자가 실행시킨 SQL문을 Server Process에 전달하고, 그 결과를 Server Process에게 받는다.
 
 ## Server Process
 
-- Oracle은 Server Process를 생성하여 접속된 User Process의 요구 사항 처리
-- User Process와의 통신과 요구 사항을 수행하는 Oracle과의 상호 작용 담당
-- Oracle은 Server Process당 User Process 수를 조정하도록 구성 가능
-- 전용 서버 구성에서 Server Process는 단일 User Process에 대한 요구 사항을 처리함
-- 공유 서버 구성에서는 여러 개의 User Process가 적은 수의 Server Process를 공유하여 Server Process 수를 최소화하는 동시에 사용 가능한 시스템 자원 활용도를 최대화
-- 오라클 Server Process는 사용자로부터 받은 요구사항(SQL문)을 처리
-- 전달받은 SQL문을 Parse, Bind, Execute, Fetch 작업을 통해 실행시키는 역할 수행
+- Oracle은 Server Process를 생성하여 접속된 User Process의 요구 사항을 처리한다.
+- User Process와의 통신과 요구 사항을 수행하는 Oracle과의 상호 작용 담당한다.
+- Oracle은 Server Process당 User Process 수를 조정하도록 구성 가능하다.
+- **전용 서버** 구성에서 Server Process는 단일 User Process에 대한 요구 사항을 처리한다.
+- **공유 서버** 구성에서는 여러 개의 User Process가 적은 수의 Server Process를 공유하여 Server Process 수를 최소화하는 동시에 사용 가능한 시스템 자원 활용도를 최대화한다.
+- 오라클 Server Process는 사용자로부터 받은 요구사항(SQL문)을 처리한다.
+- 전달받은 SQL문을 Parse, Bind, Execute, Fetch 작업을 통해 실행시키는 역할 수행한다.
 
 ### Parse, Bind, Execute, Fetch
 
-1. Parse - 동일한 쿼리인지 DB hit ratio 추가 검색
+1. Parse - 동일한 쿼리인지 DB hit ratio 추가 검색한다.
     - SQL문 문법 검사
     - 사용자 인증 및 권한 검사
     - 객체의 사용 가능 여부 검사
 2. Bind
-    - bind 할 값이 있다면 값을 치환해 변수값을 적용해 Execute 과정으로 넘김
-    - 없을 경우 바로 Execute 과정으로 넘김
+    - bind 할 값이 있다면 값을 치환해 변수값을 적용해 Execute 과정으로 넘긴다.
+    - 없을 경우 바로 Execute 과정으로 넘긴다.
 3. Execute
-    - Parse 과정에서 만들어진 Parse Tree로 원하는 데이터 찾음
-    - DB Buffer Cache에서 데이터를 찾은 후 있다면 재사용
-    - DB Buffer Cache에 존재하지 않으면 Data File에서 필요한 Block 적재 후 사용
-    - 필요할 경우 데이터 수정
+    - Parse 과정에서 만들어진 Parse Tree로 원하는 데이터 찾는다.
+    - DB Buffer Cache에서 데이터를 찾은 후 있다면 재사용한다.
+    - DB Buffer Cache에 존재하지 않으면 Data File에서 필요한 Block 적재 후 사용한다.
+    - 필요할 경우 데이터를 수정한다.
 4. Fetch
-    - 데이터를 User Process에게 전달
+    - 데이터를 User Process에게 전달한다.
 
 # PGA(Program Global Area)
 
@@ -308,19 +317,19 @@ ex)SQL*Plus, Forms, Pro*C
 
 ![png2.png](./Oracle Architecture/png2.png)
 
-- 하나의 단일 프로세스에 대한 데이터와 제어 정보를 가지고 있는 메모리 공간
-- `PGA_AGGREGATE_TARGET` parameter 값을 통해 사이즈 조절
-- USER PROCESS가 Oracle Database에 접속하고 Session이 생성될 때 Oracle에 의해 할당
-- 각 SERVER PROCESS에 하나만 할당(1 : 1)
-- 다른 프로세스와 공유되지 않는, 독립적으로 사용하는 non-shared 메모리 영역
-- 세션 변수, 배열, 다른 정보를 저장하기 위해 스택 영역을 사용
-- PGA는 프로세스가 생성될 때 할당, 프로세스가 종료될 때 해제
-- PGA는 모드 구성에 따라 저장 위치가 다름
+- 하나의 단일 프로세스에 대한 데이터와 제어 정보를 가지고 있는 메모리 공간이다.
+- `PGA_AGGREGATE_TARGET` parameter 값을 통해 사이즈 조절 가능하다.
+- USER PROCESS가 Oracle Database에 접속하고 Session이 생성될 때 Oracle에 의해 할당된다.
+- 각 SERVER PROCESS에 하나만 할당한다.(1 : 1)
+- 다른 프로세스와 공유되지 않는 독립적으로 사용하는 non-shared 메모리 영역이다.
+- 세션 변수, 배열, 다른 정보를 저장하기 위해 스택 영역을 사용한다.
+- PGA는 프로세스가 생성될 때 할당, 프로세스가 종료될 때 해제된다.
+- PGA는 모드 구성에 따라 저장 위치가 다르다.
     - Dedicated Server
-        - User Session Data, Cursor State, Sort Area 영역을 PGA 공간에 저장
+        - User Session Data, Cursor State, Sort Area 영역을 PGA 공간에 저장한다.
     - Shared Server
-        - User Session Data 영역을 SGA에 저장
-- Memory가 가득 찰 시 Temp Tablespace로 감
+        - User Session Data 영역을 SGA에 저장한다.
+- Memory가 가득 찰 시 Temp Tablespace로 간다.
 
 ## UGA
 
