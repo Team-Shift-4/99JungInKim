@@ -164,6 +164,10 @@ kernel.shmmni = 4096
 kernel.shmall = 4294967296
 ```
 
+```bash
+sysctl -p
+```
+
 ### SELINUX Disable
 
 ```bash
@@ -448,8 +452,6 @@ server 3.kr.pool.ntp.org
 server 1.asia.pool.ntp.org
 ```
 
-
-
 ### Create Product Path & Change Authority
 
 ```bash
@@ -561,7 +563,8 @@ unzip V17531-01.zip
 ```
 
 ```bash
-cd grid/rpm
+mv grid/* .
+cd rpm
 scp cvuqdisk-1.0.7-1.rpm rac-node2:/tmp
 ```
 
@@ -586,7 +589,7 @@ su - grid11
 ```
 
 ```bash
-cd $GRID_HOME/grid
+cd $GRID_HOME
 
 ./runcluvfy.sh stage -pre crsinst -n rac-node1,rac-node2 -fixup -verbose
 ```
@@ -669,3 +672,27 @@ ntp
 ![image-20231113195620304](./assets/image-20231113195620304.png)
 
 ![image-20231113215552775](./assets/image-20231113215552775.png)
+
+Deinstall 후 다시 진행 예정
+
+![image-20231116145603820](./assets/image-20231116145603820.png)![image-20231116145613433](./assets/image-20231116145613433.png)![image-20231116145625934](./assets/image-20231116145625934.png)![image-20231116145708145](./assets/image-20231116145708145.png)![image-20231116145738160](./assets/image-20231116145738160.png)![image-20231116145815678](./assets/image-20231116145815678.png)![image-20231116145838367](./assets/image-20231116145838367.png)![image-20231116150025938](./assets/image-20231116150025938.png)![image-20231116150058078](./assets/image-20231116150058078.png)![image-20231116150113260](./assets/image-20231116150113260.png)![image-20231116150136574](./assets/image-20231116150136574.png)![image-20231116150149957](./assets/image-20231116150149957.png)![image-20231116150208804](./assets/image-20231116150208804.png)![image-20231116150235916](./assets/image-20231116150235916.png)![image-20231116150315464](./assets/image-20231116150315464.png)![image-20231116152203265](./assets/image-20231116152203265.png)![image-20231116190513919](./assets/image-20231116190513919.png)
+
+https://handsonoracle.blogspot.com/2012/10/prkh-1010-unable-to-communicate-with.html
+
+### 재삭제 후 재시도
+
+![image-20231117112624013](./assets/image-20231117112624013.png)
+
+![image-20231117112646587](./assets/image-20231117112646587.png)
+
+![image-20231117113200583](./assets/image-20231117113200583.png)
+
+https://bae9086.tistory.com/96
+
+다른 조치사항보다 더 진행중
+
+![image-20231117130425428](./assets/image-20231117130425428.png)
+
+해결하지 못함
+
+![image-20231117130519949](./assets/image-20231117130519949.png)
