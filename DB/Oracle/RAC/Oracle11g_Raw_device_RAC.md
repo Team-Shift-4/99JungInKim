@@ -2,77 +2,77 @@
 
 ## Information
 
-| OS       | DB              |
-| -------- | --------------- |
-| CentOS 7 | Oracle 11.2.0.4 |
+| OS             | DB              |
+| -------------- | --------------- |
+| Oracle Linux 7 | Oracle 11.2.0.4 |
 
 
 
-| Public IP    | Private IP     | Virtual IP   | SCAN IP      | Gateway      | DNS      |
-| ------------ | -------------- | ------------ | ------------ | ------------ | -------- |
-| 172.16.0.112 | 192.168.56.112 | 172.16.0.235 | 172.16.0.234 | 172.16.0.254 | loopback |
-| 172.16.0.113 | 192.168.56.113 | 172.16.0.236 | 172.16.0.234 | 172.16.0.254 | loopback |
+| Public IP     | Private IP    | Virtual IP    | SCAN IP       | Gateway        | DNS      |
+| ------------- | ------------- | ------------- | ------------- | -------------- | -------- |
+| 192.168.56.11 | 192.168.57.11 | 192.168.56.21 | 192.168.56.31 | 192.168.56.254 | loopback |
+| 192.168.56.12 | 192.168.57.12 | 192.168.56.22 | 192.168.56.31 | 192.168.56.254 | loopback |
 
 | Logical Volume | Size   | Description |
 | -------------- | ------ | ----------- |
-| ocr01          | 508m   |             |
-| ocr02          | 508m   |             |
-| ocr03          | 508m   |             |
-| vote01         | 508m   |             |
-| vote02         | 508m   |             |
-| vote03         | 508m   |             |
-| control01      | 108m   |             |
-| control02      | 108m   |             |
-| system01       | 1.01g  |             |
-| sysaux02       | 1.01g  |             |
-| undo01         | 1.01g  |             |
-| undo02         | 1.01g  |             |
-| users01        | 508m   |             |
-| temp01         | 508m   |             |
-| 200mredo01     | 208m   |             |
-| 200mredo02     | 208m   |             |
-| 200mredo03     | 208m   |             |
-| 200mredo04     | 208m   |             |
-| 200mredo05     | 208m   |             |
-| 200mredo06     | 208m   |             |
-| 200mredo07     | 208m   |             |
-| 200mredo08     | 208m   |             |
-| 200mredo09     | 208m   |             |
-| 200mredo10     | 208m   |             |
-| 200mredo11     | 208m   |             |
-| 200mredo12     | 208m   |             |
-| 200mredo13     | 208m   |             |
-| 200mredo14     | 208m   |             |
-| 200mredo15     | 208m   |             |
-| 200mredo16     | 208m   |             |
-| 200mredo17     | 208m   |             |
-| 200mredo18     | 208m   |             |
-| 200mredo19     | 208m   |             |
-| 200mredo20     | 208m   |             |
-| 1gredo01       | 1.01g  |             |
-| 1gredo02       | 1.01g  |             |
-| 1gredo03       | 1.01g  |             |
-| 1gredo04       | 1.01g  |             |
-| 1gredo05       | 1.01g  |             |
-| 1gredo06       | 1.01g  |             |
-| 1gredo07       | 1.01g  |             |
-| 1gredo08       | 1.01g  |             |
-| 1gredo09       | 1.01g  |             |
-| 1gredo10       | 1.01g  |             |
-| 5gredo01       | 5.01g  |             |
-| 5gredo02       | 5.01g  |             |
-| 5gredo03       | 5.01g  |             |
-| 5gredo04       | 5.01g  |             |
-| 5gredo05       | 5.01g  |             |
-| 5gredo06       | 5.01g  |             |
-| 5gredo07       | 5.01g  |             |
-| 5gredo08       | 5.01g  |             |
-| 5gredo09       | 5.01g  |             |
-| 5gredo10       | 5.01g  |             |
-| spfile         | 308m   |             |
-| orapwd         | 308m   |             |
-| tbs01          | 50.01g |             |
-| tbs02          | 50.01g |             |
+| ocr01          | 508m   | 1           |
+| ocr02          | 508m   | 2           |
+| ocr03          | 508m   | 3           |
+| vote01         | 508m   | 4           |
+| vote02         | 508m   | 5           |
+| vote03         | 508m   | 6           |
+| control01      | 108m   | 7           |
+| control02      | 108m   | 8           |
+| system01       | 1.01g  | 9           |
+| sysaux01       | 1.01g  | 10          |
+| undo01         | 1.01g  | 11          |
+| undo02         | 1.01g  | 12          |
+| users01        | 508m   | 13          |
+| temp01         | 508m   | 14          |
+| 200mredo01     | 208m   | 15          |
+| 200mredo02     | 208m   | 16          |
+| 200mredo03     | 208m   | 17          |
+| 200mredo04     | 208m   | 18          |
+| 200mredo05     | 208m   | 19          |
+| 200mredo06     | 208m   | 20          |
+| 200mredo07     | 208m   | 21          |
+| 200mredo08     | 208m   | 22          |
+| 200mredo09     | 208m   | 23          |
+| 200mredo10     | 208m   | 24          |
+| 200mredo11     | 208m   | 25          |
+| 200mredo12     | 208m   | 26          |
+| 200mredo13     | 208m   | 27          |
+| 200mredo14     | 208m   | 28          |
+| 200mredo15     | 208m   | 29          |
+| 200mredo16     | 208m   | 30          |
+| 200mredo17     | 208m   | 31          |
+| 200mredo18     | 208m   | 32          |
+| 200mredo19     | 208m   | 33          |
+| 200mredo20     | 208m   | 34          |
+| 1gredo01       | 1.01g  | 35          |
+| 1gredo02       | 1.01g  | 36          |
+| 1gredo03       | 1.01g  | 37          |
+| 1gredo04       | 1.01g  | 38          |
+| 1gredo05       | 1.01g  | 39          |
+| 1gredo06       | 1.01g  | 40          |
+| 1gredo07       | 1.01g  | 41          |
+| 1gredo08       | 1.01g  | 42          |
+| 1gredo09       | 1.01g  | 43          |
+| 1gredo10       | 1.01g  | 44          |
+| 5gredo01       | 5.01g  | 45          |
+| 5gredo02       | 5.01g  | 46          |
+| 5gredo03       | 5.01g  | 47          |
+| 5gredo04       | 5.01g  | 48          |
+| 5gredo05       | 5.01g  | 49          |
+| 5gredo06       | 5.01g  | 50          |
+| 5gredo07       | 5.01g  | 51          |
+| 5gredo08       | 5.01g  | 52          |
+| 5gredo09       | 5.01g  | 53          |
+| 5gredo10       | 5.01g  | 54          |
+| spfile         | 308m   | 55          |
+| orapwd         | 308m   | 56          |
+| tbs01          | 50.01g | 57          |
+| tbs02          | 50.01g | 58          |
 
 ## Installation
 
@@ -192,11 +192,12 @@ SELINUXTYPE=targeted
 ```bash
 groupadd oinstall
 groupadd dba
+groupadd oper
 groupadd asmadmin
 groupadd asmoper
 groupadd asmdba
 
-useradd -g oinstall -G dba,asmdba oracle11
+useradd -g oinstall -G dba,asmdba,oper oracle11
 useradd -g oinstall -G asmadmin,asmoper,asmdba,dba grid11
 
 passwd oracle11
@@ -308,7 +309,7 @@ lvs -o +lv_kernel_major,lv_kernel_minor -O lv_kernel_major
   control01  rac    -wi-a-----  108.00m                                                      253    8
   control02  rac    -wi-a-----  108.00m                                                      253    9
   system01   rac    -wi-a-----   <1.01g                                                      253   10
-  sysaux01   rac    -wi-a-----   <1.01g                                                      253   11
+  system02   rac    -wi-a-----   <1.01g                                                      253   11
   undo01     rac    -wi-a-----   <1.01g                                                      253   12
   undo02     rac    -wi-a-----   <1.01g                                                      253   13
   users01    rac    -wi-a-----  508.00m                                                      253   14
@@ -441,6 +442,8 @@ mv /etc/ntp.conf /etc/ntp.conf.back
 
 ### Set NTP Daemon Enable
 
+https://servermon.tistory.com/349
+
 ```bash
 yum install -y chrony
 
@@ -520,10 +523,10 @@ su - oracle11
 ssh-keygen -t rsa
 ssh-keygen -t dsa
 
-ssh rac-node1 cat /home/oracle11/.ssh/id_rsa.pub >> authorized_keys
-ssh rac-node1 cat /home/oracle11/.ssh/id_dsa.pub >> authorized_keys
-ssh rac-node2 cat /home/oracle11/.ssh/id_rsa.pub >> authorized_keys
-ssh rac-node2 cat /home/oracle11/.ssh/id_dsa.pub >> authorized_keys
+ssh rac1 cat /home/oracle11/.ssh/id_rsa.pub >> authorized_keys
+ssh rac1 cat /home/oracle11/.ssh/id_dsa.pub >> authorized_keys
+ssh rac2 cat /home/oracle11/.ssh/id_rsa.pub >> authorized_keys
+ssh rac2 cat /home/oracle11/.ssh/id_dsa.pub >> authorized_keys
 ```
 
 ```bash
@@ -534,10 +537,10 @@ su - grid11
 ssh-keygen -t rsa
 ssh-keygen -t dsa
 
-ssh rac-node1 cat /home/grid11/.ssh/id_rsa.pub >> authorized_keys
-ssh rac-node1 cat /home/grid11/.ssh/id_dsa.pub >> authorized_keys
-ssh rac-node2 cat /home/grid11/.ssh/id_rsa.pub >> authorized_keys
-ssh rac-node2 cat /home/grid11/.ssh/id_dsa.pub >> authorized_keys
+ssh rac1 cat /home/grid11/.ssh/id_rsa.pub >> authorized_keys
+ssh rac1 cat /home/grid11/.ssh/id_dsa.pub >> authorized_keys
+ssh rac2 cat /home/grid11/.ssh/id_rsa.pub >> authorized_keys
+ssh rac2 cat /home/grid11/.ssh/id_dsa.pub >> authorized_keys
 ```
 
 #### Check Network Interface Name
@@ -696,3 +699,77 @@ https://bae9086.tistory.com/96
 해결하지 못함
 
 ![image-20231117130519949](./assets/image-20231117130519949.png)
+
+# OL8
+
+![image-20231124115947602](./assets/image-20231124115947602.png)
+
+![image-20231124131222308](./assets/image-20231124131222308.png)
+
+![image-20231124131303967](./assets/image-20231124131303967.png)
+
+![image-20231128154320979](./assets/image-20231128154320979.png)
+
+설치 완료!!
+
+# DB
+
+![image-20231128155208708](./assets/image-20231128155208708.png)
+
+![image-20231128155253334](./assets/image-20231128155253334.png)
+
+![image-20231128155308341](./assets/image-20231128155308341.png)
+
+![image-20231128155419112](./assets/image-20231128155419112.png)
+
+![image-20231128155428207](./assets/image-20231128155428207.png)
+
+![image-20231128155441733](./assets/image-20231128155441733.png)
+
+![image-20231128155457898](./assets/image-20231128155457898.png)
+
+![image-20231128155526226](./assets/image-20231128155526226.png)
+
+![image-20231128155629320](./assets/image-20231128155629320.png)
+
+![image-20231128155805100](./assets/image-20231128155805100.png)
+
+![image-20231128155913039](./assets/image-20231128155913039.png)
+
+![image-20231128160359518](./assets/image-20231128160359518.png)
+
+![image-20231128162139863](./assets/image-20231128162139863.png)
+
+![image-20231128162215083](./assets/image-20231128162215083.png)
+
+![image-20231128162225281](./assets/image-20231128162225281.png)
+
+![image-20231128163233493](./assets/image-20231128163233493.png)
+
+![image-20231128163259543](./assets/image-20231128163259543.png)
+
+![image-20231128163320859](./assets/image-20231128163320859.png)
+
+![image-20231128163404315](./assets/image-20231128163404315.png)
+
+![image-20231129105155691](./assets/image-20231129105155691.png)
+
+![image-20231129105234961](./assets/image-20231129105234961.png)
+
+![image-20231129105252522](./assets/image-20231129105252522.png)
+
+![image-20231129105313330](./assets/image-20231129105313330.png)
+
+![image-20231129105336405](./assets/image-20231129105336405.png)
+
+![image-20231129105404971](./assets/image-20231129105404971.png)
+
+![image-20231129105447718](./assets/image-20231129105447718.png)
+
+```bash
+RAWRAC111:PWD> $GRID_HOME/bin/crsctl add css votedisk /dev/raw/raw5
+Now formatting voting disk: /dev/raw/raw5.
+CRS-4602: Failed 8 to add voting file /dev/raw/raw5.
+CRS-4000: Command Add failed, or completed with errors.
+```
+

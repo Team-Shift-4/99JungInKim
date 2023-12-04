@@ -1814,6 +1814,12 @@ Table Drop이나 Truncate를 통해 Table을 초기화하여 HWM를 초기화할
 
 ## ASM
 
+Oracle ASM은 Oracle Automatic Storage Management의 약자이다.
+오라클이 직접 파일들이 저장되는 저장 공간을 관리하는 방식이다.
+ASM의 주요 특징으로는 효율적인 저장 공간 관리와 Disk I/O의 분산, 쓰기 속도와 활용 속도 증가, 레이아웃과 데이터 조직을 관리한다는 것들이 있다.
+
+디스크에 저장할 때 ASM에서는 최소단위만큼 나눠 균등하게 저장하는데 이를 AU(Allocation Unit)이라고 한다.
+
 ## RAC
 
 ## Multitenant
